@@ -27,25 +27,25 @@ export function deviceSvg(opts: { colour: string; camera: CameraStyle; label: st
   const dark = shade(colour, -38);
   const frame = shade(colour, -18);
   const bx = 300, by = 70, bw = 220, bh = 460;
-  let module = "";
+  let cam = "";
   if (camera === "dual-diagonal" || camera === "dual-vertical") {
     const mx = bx + 18, my = by + 18;
-    module = `<rect x="${mx}" y="${my}" width="92" height="92" rx="26" fill="${shade(colour, 12)}" stroke="${dark}" stroke-opacity=".35"/>
+    cam = `<rect x="${mx}" y="${my}" width="92" height="92" rx="26" fill="${shade(colour, 12)}" stroke="${dark}" stroke-opacity=".35"/>
       ${camera === "dual-diagonal" ? lens(mx + 28, my + 28, 15, id) + lens(mx + 64, my + 64, 15, id) : lens(mx + 30, my + 26, 15, id) + lens(mx + 30, my + 66, 15, id)}
       <circle cx="${mx + 70}" cy="${my + 24}" r="5" fill="#f5e7c8" opacity=".8"/>`;
   } else if (camera === "pro-triple") {
     const mx = bx + 16, my = by + 16;
-    module = `<rect x="${mx}" y="${my}" width="110" height="110" rx="30" fill="${shade(colour, -8)}" stroke="${dark}" stroke-opacity=".4"/>
+    cam = `<rect x="${mx}" y="${my}" width="110" height="110" rx="30" fill="${shade(colour, -8)}" stroke="${dark}" stroke-opacity=".4"/>
       ${lens(mx + 32, my + 32, 18, id)}${lens(mx + 32, my + 80, 18, id)}${lens(mx + 80, my + 56, 18, id)}
       <circle cx="${mx + 84}" cy="${my + 20}" r="6" fill="#f5e7c8" opacity=".8"/>`;
   } else if (camera === "plateau-pro") {
     const my = by + 14;
-    module = `<rect x="${bx + 8}" y="${my}" width="${bw - 16}" height="118" rx="30" fill="${shade(colour, -14)}" stroke="${dark}" stroke-opacity=".4"/>
+    cam = `<rect x="${bx + 8}" y="${my}" width="${bw - 16}" height="118" rx="30" fill="${shade(colour, -14)}" stroke="${dark}" stroke-opacity=".4"/>
       ${lens(bx + 44, my + 34, 18, id)}${lens(bx + 44, my + 84, 18, id)}${lens(bx + 92, my + 59, 18, id)}
       <circle cx="${bx + 170}" cy="${my + 40}" r="7" fill="#f5e7c8" opacity=".8"/><circle cx="${bx + 170}" cy="${my + 78}" r="5" fill="#222"/>`;
   } else {
     const my = by + 16;
-    module = `<rect x="${bx + 10}" y="${my}" width="${bw - 20}" height="66" rx="30" fill="${shade(colour, -10)}" stroke="${dark}" stroke-opacity=".35"/>
+    cam = `<rect x="${bx + 10}" y="${my}" width="${bw - 20}" height="66" rx="30" fill="${shade(colour, -10)}" stroke="${dark}" stroke-opacity=".35"/>
       ${lens(bx + 46, my + 33, 18, id)}<circle cx="${bx + 100}" cy="${my + 33}" r="6" fill="#f5e7c8" opacity=".8"/>`;
   }
 
@@ -87,7 +87,7 @@ export function deviceSvg(opts: { colour: string; camera: CameraStyle; label: st
       <rect x="${bx}" y="${by}" width="${bw}" height="${bh}" rx="40" fill="${frame}"/>
       <rect x="${bx + 5}" y="${by + 5}" width="${bw - 10}" height="${bh - 10}" rx="36" fill="url(#back${id})"/>
       <rect x="${bx + 5}" y="${by + 5}" width="${bw - 10}" height="${bh - 10}" rx="36" fill="url(#sheen${id})"/>
-      ${module}
+      ${cam}
     </g>
   </g>
 </svg>`;

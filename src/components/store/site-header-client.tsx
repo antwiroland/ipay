@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Dialog as D } from "radix-ui";
 import { useState } from "react";
-import { logoutAction } from "@/app/actions/auth";
+import { useLogout } from "@/components/logout-button";
 import { Logo } from "@/components/brand";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, SheetContent } from "@/components/ui/overlays";
@@ -40,6 +40,7 @@ export function NavLinks({ items }: { items: NavItem[] }) {
 }
 
 export function AccountMenu({ user }: { user: NonNullable<HeaderUser> }) {
+  const { logout, pending } = useLogout();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -73,11 +74,9 @@ export function AccountMenu({ user }: { user: NonNullable<HeaderUser> }) {
           </>
         )}
         <DropdownMenuSeparator />
-        <form action={logoutAction}>
-          <DropdownMenuItem asChild>
-            <button type="submit" className="w-full"><LogOut /> Log out</button>
-          </DropdownMenuItem>
-        </form>
+        <DropdownMenuItem disabled={pending} onSelect={() => logout()}>
+          <LogOut /> {pending ? "Logging out…" : "Log out"}
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -85,6 +84,7 @@ export function AccountMenu({ user }: { user: NonNullable<HeaderUser> }) {
 
 export function MobileNav({ items, user }: { items: NavItem[]; user: HeaderUser }) {
   const [open, setOpen] = useState(false);
+  const { logout, pending } = useLogout();
   const pathname = usePathname();
   const close = () => setOpen(false);
   return (
@@ -98,7 +98,7 @@ export function MobileNav({ items, user }: { items: NavItem[]; user: HeaderUser 
         <div className="border-b border-border p-4">
           <Logo />
         </div>
-        <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-3" aria-label="Mobile">
+        <nav className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto p-3" aria-label="Mobile">
           {items.map((i) => (
             <Link key={i.href} href={i.href} onClick={close} className={cn("rounded-lg px-3 py-3 text-[15px]", isActive(pathname, i.href) ? "bg-surface-2 font-medium" : "text-muted")}>
               {i.label}
@@ -123,9 +123,7 @@ export function MobileNav({ items, user }: { items: NavItem[]; user: HeaderUser 
         </nav>
         <div className="border-t border-border p-4">
           {user ? (
-            <form action={logoutAction}>
-              <Button variant="outline" className="w-full" type="submit"><LogOut /> Log out</Button>
-            </form>
+            <Button variant="outline" className="w-full" onClick={logout} loading={pending}><LogOut /> Log out</Button>
           ) : (
             <div className="grid grid-cols-2 gap-2">
               <Button variant="outline" asChild><Link href="/login" onClick={close}>Log in</Link></Button>

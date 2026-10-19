@@ -28,7 +28,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     { href: "/admin/settings", label: "Settings", icon: "settings", perm: "settings.manage" },
     { href: "/admin/security", label: "My security", icon: "security", perm: "admin.access" },
   ];
-  const items = all.filter((i) => hasPermission(actor.role, i.perm)).map(({ perm: _p, ...i }) => i);
+  const items = all.filter((i) => hasPermission(actor.role, i.perm)).map(({ href, label, icon, badge }) => ({ href, label, icon, badge }));
   return (
     <div className="flex min-h-screen flex-col bg-background lg:flex-row">
       <AdminSidebar items={items} name={actor.name} role={ROLE_LABEL[actor.role]} sandbox={isSandboxMode()} />

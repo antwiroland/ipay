@@ -100,7 +100,7 @@ export default async function AdminOrderDetail({ params }: { params: Promise<{ o
       </div>
       <Progress value={pct} label="Payment progress" />
 
-      <div className="grid gap-6 xl:grid-cols-[1.6fr_1fr]">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 xl:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
         <div className="space-y-6">
           <Card>
             <CardHeader><CardTitle>Installment schedule</CardTitle></CardHeader>

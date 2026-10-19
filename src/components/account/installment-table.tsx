@@ -26,7 +26,7 @@ export function InstallmentTable({ rows, graceDays, now = new Date() }: { rows: 
       {/* Mobile: timeline cards */}
       <ol className="space-y-2 md:hidden">
         {withStatus.map((r) => (
-          <li key={r._id} className="flex items-center justify-between gap-3 rounded-[14px] border border-border bg-surface p-3.5">
+          <li key={r._id} className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5 rounded-[14px] border border-border bg-surface p-3.5">
             <div>
               <p className="text-sm font-medium">#{r.installmentNumber} · {formatDate(r.dueDate)}</p>
               <p className="tabular text-[12.5px] text-muted">

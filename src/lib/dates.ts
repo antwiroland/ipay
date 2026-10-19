@@ -46,3 +46,13 @@ export function formatDateTime(d: Date | string | null | undefined): string {
 export function monthKey(d: Date): string {
   return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`;
 }
+
+/** True when `d` is within the last `days` days (used for "recently completed" banners). */
+export function isWithinDays(d: Date | string | null | undefined, days: number, now = new Date()): boolean {
+  if (!d) return false;
+  return now.getTime() - new Date(d).getTime() < days * DAY_MS;
+}
+
+export function daysAgo(days: number, now = new Date()): Date {
+  return new Date(now.getTime() - days * DAY_MS);
+}

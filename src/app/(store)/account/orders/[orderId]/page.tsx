@@ -112,7 +112,7 @@ export default async function OrderDetailPage({ params, searchParams }: { params
         />
       )}
 
-      <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
         <div className="space-y-6">
           <Card>
             <CardHeader>
@@ -149,7 +149,7 @@ export default async function OrderDetailPage({ params, searchParams }: { params
                         <p className="text-[12.5px] text-muted">{formatDateTime(p.verifiedAt ?? p.createdAt)} {p.channelDetail && `· ${p.channelDetail}`}</p>
                         {p.status === "failed" && <p className="text-[12.5px] text-danger">Not completed — no money was applied. You can try again.</p>}
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex flex-wrap items-center gap-2">
                         {p.isTest && <SandboxBadge />}
                         <span className="tabular text-sm font-semibold">{formatGHS(p.amount)}</span>
                         <PaymentStatusBadge status={p.status} />

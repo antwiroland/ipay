@@ -42,7 +42,7 @@ export default async function InstallmentsPage() {
       </div>
       {overdue > 0 && (
         <Alert tone="warning" className="mb-4" title="You have an overdue installment">
-          Pay any amount towards it from your order page, or contact support if you need help — we're happy to talk it through.
+          Pay any amount towards it from your order page, or contact support if you need help — we&apos;re happy to talk it through.
         </Alert>
       )}
       {rows.length ? (

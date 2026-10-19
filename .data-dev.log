@@ -138,3 +138,557 @@ Hi Roland, welcome to iPay Ghana. Browse iPhones and choose a plan that fits you
 ✓ Compiled in 1069ms
  GET /shop 200 in 1690ms (next.js: 7ms, application-code: 1683ms)
   Turbopack has seen frequent file updates and is waiting for the filesystem to settle (0.5s elapsed so far; last modified: "\\\\?\\C:\\Users\\HP\\Desktop\\ipay\\.git\\objects\\6d").
+ GET /admin 307 in 2.1s (next.js: 642ms, proxy.ts: 30ms, application-code: 1416ms)
+ GET /account 200 in 2.2s (next.js: 118ms, proxy.ts: 16ms, application-code: 2.1s)
+✓ Compiled in 5.5s
+ GET /account 200 in 4.4s (next.js: 2.5s, proxy.ts: 151ms, application-code: 1831ms)
+ GET /account 200 in 2.4s (next.js: 1140ms, proxy.ts: 134ms, application-code: 1102ms)
+ GET /account 200 in 3.4s (next.js: 1340ms, proxy.ts: 80ms, application-code: 1938ms)
+ GET / 200 in 4.3s (next.js: 8ms, application-code: 4.3s)
+ GET /shop 200 in 2.9s (next.js: 5ms, application-code: 2.9s)
+ GET /shop 200 in 2.7s (next.js: 9ms, application-code: 2.6s)
+ GET / 200 in 3.7s (next.js: 5ms, application-code: 3.7s)
+✓ Compiled in 5.4s
+○ Compiling /account ...
+ GET /account 200 in 11.5s (next.js: 10.2s, proxy.ts: 19ms, application-code: 1263ms)
+✓ Compiled in 1410ms
+ GET /account 200 in 3.6s (next.js: 2.2s, proxy.ts: 17ms, application-code: 1344ms)
+✓ Compiled in 1137ms
+ GET /account 200 in 1376ms (next.js: 444ms, proxy.ts: 11ms, application-code: 921ms)
+✓ Compiled in 920ms
+ GET /account 200 in 1875ms (next.js: 898ms, proxy.ts: 12ms, application-code: 964ms)
+ GET /shop 200 in 3.0s (next.js: 20ms, application-code: 3.0s)
+ GET /login 200 in 863ms (next.js: 55ms, application-code: 807ms)
+ GET /login 200 in 614ms (next.js: 5ms, application-code: 609ms)
+ POST /login 200 in 2.1s (next.js: 4ms, application-code: 2.1s)
+  └─ ƒ loginAction({"email":"superadmin@ipayghana.test","password":"Admin12345!"}, undefined) in 1289ms src/app/actions/auth.ts
+ GET /admin 200 in 3.1s (next.js: 512ms, proxy.ts: 68ms, application-code: 2.5s)
+ GET /admin 200 in 2.3s (next.js: 98ms, proxy.ts: 44ms, application-code: 2.1s)
+ GET /admin/products 200 in 5.6s (next.js: 444ms, proxy.ts: 39ms, application-code: 5.1s)
+ POST /admin/products 200 in 5.1s (next.js: 874ms, proxy.ts: 23ms, application-code: 4.2s)
+  └─ ƒ stockAction("6ad57a3fd79d5c68131189a6", {"note":"Browser check — will be reverted","op":"add","quantity":3}) in 2211ms src/app/actions/admin.ts
+ GET /admin/products 200 in 1552ms (next.js: 33ms, proxy.ts: 16ms, application-code: 1503ms)
+ POST /admin/products 200 in 2.9s (next.js: 36ms, proxy.ts: 32ms, application-code: 2.9s)
+  └─ ƒ stockAction("6ad57a3fd79d5c68131189a6", {"note":"Revert browser check","op":"remove","quantity":3}) in 1358ms src/app/actions/admin.ts
+ GET /admin/products 200 in 1531ms (next.js: 137ms, proxy.ts: 22ms, application-code: 1371ms)
+ POST /admin/products 200 in 567ms (next.js: 70ms, proxy.ts: 34ms, application-code: 463ms)
+  └─ ƒ logoutAction() in 236ms src/app/actions/auth.ts
+ GET /login?next=%2Fadmin 200 in 1211ms (next.js: 63ms, application-code: 1148ms)
+ GET /login?next=%2Fadmin 200 in 414ms (next.js: 6ms, application-code: 407ms)
+ GET / 200 in 3.7s (next.js: 33ms, application-code: 3.7s)
+ POST / 200 in 66ms (next.js: 4ms, application-code: 63ms)
+ GET /login?next=%2Fadmin 200 in 1301ms (next.js: 5ms, application-code: 1296ms)
+ GET /login 200 in 634ms (next.js: 5ms, application-code: 629ms)
+ POST /login 200 in 2.2s (next.js: 5ms, application-code: 2.2s)
+  └─ ƒ loginAction({"email":"ama@example.com","password":"Customer123!"}, undefined) in 1180ms src/app/actions/auth.ts
+ GET /account 200 in 1445ms (next.js: 122ms, proxy.ts: 15ms, application-code: 1308ms)
+ GET /account 200 in 1329ms (next.js: 35ms, proxy.ts: 15ms, application-code: 1280ms)
+ POST /account 200 in 1051ms (next.js: 31ms, proxy.ts: 12ms, application-code: 1007ms)
+  └─ ƒ logoutAction() in 183ms src/app/actions/auth.ts
+ GET /login?next=%2Faccount 200 in 207ms (next.js: 4ms, application-code: 202ms)
+ GET /login?next=%2Faccount 200 in 138ms (next.js: 6ms, application-code: 132ms)
+ GET / 200 in 3.5s (next.js: 6ms, application-code: 3.5s)
+ POST / 200 in 379ms (next.js: 6ms, application-code: 373ms)
+  └─ ƒ trackImpressionAction("6ad57a95e8d04a6204ac24da") in 299ms src/app/actions/public.ts
+ GET /login?next=%2Faccount 200 in 780ms (next.js: 4ms, application-code: 776ms)
+ GET /login 200 in 1019ms (next.js: 5ms, application-code: 1014ms)
+ POST /login 200 in 2.5s (next.js: 6ms, application-code: 2.5s)
+  └─ ƒ loginAction({"email":"kwame@example.com","password":"Customer123!"}, undefined) in 1082ms src/app/actions/auth.ts
+ GET /account 200 in 1368ms (next.js: 117ms, proxy.ts: 15ms, application-code: 1236ms)
+ GET /account 200 in 1248ms (next.js: 84ms, proxy.ts: 16ms, application-code: 1148ms)
+ GET / 200 in 3.1s (next.js: 17ms, application-code: 3.1s)
+ POST / 200 in 353ms (next.js: 6ms, application-code: 347ms)
+  └─ ƒ trackImpressionAction("6ad57a95e8d04a6204ac24da") in 305ms src/app/actions/public.ts
+✓ Compiled in 1024ms
+ GET /login 200 in 503ms (next.js: 13ms, application-code: 490ms)
+ POST /login 200 in 3.8s (next.js: 5ms, application-code: 3.8s)
+  └─ ƒ loginAction({"email":"superadmin@ipayghana.test","password":"Admin12345!"}, undefined) in 1989ms src/app/actions/auth.ts
+ GET /admin 200 in 3.5s (next.js: 185ms, proxy.ts: 93ms, application-code: 3.3s)
+ GET /admin 200 in 3.1s (next.js: 82ms, proxy.ts: 27ms, application-code: 3.0s)
+ GET /admin/products 200 in 3.8s (next.js: 177ms, proxy.ts: 29ms, application-code: 3.6s)
+ POST /admin/products 200 in 2.9s (next.js: 56ms, proxy.ts: 24ms, application-code: 2.9s)
+  └─ ƒ stockAction("6ad57a3fd79d5c68131189a6", {"note":"","op":"add","quantity":3}) in 1342ms src/app/actions/admin.ts
+ GET /admin/products 200 in 1386ms (next.js: 33ms, proxy.ts: 14ms, application-code: 1339ms)
+ POST /admin/products 200 in 4.4s (next.js: 399ms, proxy.ts: 81ms, application-code: 3.9s)
+  └─ ƒ stockAction("6ad57a3fd79d5c68131189a6", {"note":"Revert browser check","op":"set","quantity":6}) in 1431ms src/app/actions/admin.ts
+ GET /admin/products 200 in 2.1s (next.js: 49ms, proxy.ts: 24ms, application-code: 2.1s)
+ POST /admin/products 200 in 533ms (next.js: 33ms, proxy.ts: 59ms, application-code: 441ms)
+  └─ ƒ logoutAction() in 177ms src/app/actions/auth.ts
+ GET /login?next=%2Fadmin 200 in 5.7s (next.js: 400ms, application-code: 5.3s)
+ GET /login?next=%2Fadmin 200 in 3.8s (next.js: 91ms, application-code: 3.7s)
+ GET / 200 in 6.3s (next.js: 10ms, application-code: 6.3s)
+ GET /account 200 in 6.5s (next.js: 1082ms, proxy.ts: 1286ms, application-code: 4.1s)
+ POST / 200 in 865ms (next.js: 18ms, application-code: 847ms)
+  └─ ƒ trackImpressionAction("6ad57a95e8d04a6204ac24da") in 346ms src/app/actions/public.ts
+ POST /account 200 in 2.9s (next.js: 355ms, proxy.ts: 215ms, application-code: 2.3s)
+  └─ ƒ logoutAction() in 285ms src/app/actions/auth.ts
+ GET /login?next=%2Fadmin 200 in 842ms (next.js: 48ms, application-code: 794ms)
+ GET /login 200 in 702ms (next.js: 10ms, application-code: 692ms)
+ POST /login 200 in 3.2s (next.js: 4ms, application-code: 3.2s)
+  └─ ƒ loginAction({"email":"ama@example.com","password":"Customer123!"}, undefined) in 1347ms src/app/actions/auth.ts
+ GET /account 200 in 1950ms (next.js: 434ms, proxy.ts: 64ms, application-code: 1451ms)
+ GET /account 200 in 1407ms (next.js: 69ms, proxy.ts: 31ms, application-code: 1306ms)
+ POST /account 200 in 1972ms (next.js: 140ms, proxy.ts: 21ms, application-code: 1811ms)
+  └─ ƒ logoutAction() in 173ms src/app/actions/auth.ts
+ GET /login?next=%2Faccount 200 in 845ms (next.js: 124ms, application-code: 720ms)
+ GET /login?next=%2Faccount 200 in 6.3s (next.js: 40ms, application-code: 6.2s)
+ GET / 200 in 8.7s (next.js: 4ms, application-code: 8.7s)
+ POST / 200 in 1303ms (next.js: 10ms, application-code: 1293ms)
+  └─ ƒ trackImpressionAction("6ad57a95e8d04a6204ac24da") in 1023ms src/app/actions/public.ts
+ GET /login?next=%2Faccount 200 in 2.1s (next.js: 13ms, application-code: 2.1s)
+ GET /shop 200 in 3.5s (next.js: 13ms, application-code: 3.5s)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HTTPAccessFallbackErrorBoundary pathname="/shop" notFound={{...}} forbidden={undefined} unauthorized={undefined} ...>
+      <RedirectBoundary>
+        <RedirectErrorBoundary router={{...}}>
+          <InnerLayoutRouter url="/shop" tree={[...]} params={{}} renderTree={{...}} segmentPath={[...]} ...>
+            <SegmentViewNode type="layout" pagePath="(store)/la...">
+              <SegmentTrieNode>
+              <script>
+              <script>
+              <StoreLayout>
+                <header>
+                <main>
+                <SiteFooter>
+                  <footer className="no-print m...">
+                    <div className="mx-auto gr...">
+                      <div>
+                      <div>
+                      <div>
+                      <div>
+                        <h3>
+                        <p>
+                        <NewsletterForm>
+                          <form action={function bound dispatchActionState} className="mt-4 space...">
+                            <div className="flex gap-2">
+                              <label>
+                              <_c5 id="newsletter..." name="email" type="email" required={true} ...>
+                                <input
+                                  ref={null}
+                                  className="h-10 w-full rounded-[10px] border border-border-strong bg-surface px-3 te..."
+                                  id="newsletter-email"
+                                  name="email"
+                                  type="email"
+                                  required={true}
+                                  placeholder="you@example.com"
+                                  autoComplete="email"
+-                                 style={{caret-color:"transparent"}}
+                                >
+                              ...
+                            <label className="flex items...">
+                              <input
+                                type="checkbox"
+                                name="consent"
+                                required={true}
+                                className="mt-0.5 accent-[var(--accent)]"
+-                               style={{caret-color:"transparent"}}
+                              >
+                              ...
+                        ...
+                    ...
+          ...
+ 
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="shop/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/shop" tree={[...]} params={{}} renderTree={{...}} segmentPath={[...]} ...>
+                <SegmentViewNode type="page" pagePath="(store)/sh...">
+                  <SegmentTrieNode>
+                  <ShopPage>
+                    <div className="mx-auto ma...">
+                      <div>
+                      <Suspense>
+                        <ShopFilters series={[...]} storage={[...]} durations={[...]}>
+                          <div className="rounded-[1..." aria-busy={false}>
+                            <div>
+                            <div className="mt-4 grid ...">
+                              <div className="col-span-2...">
+                                <Label>
+                                <_c5 id="f-q" defaultValue="" placeholder="e.g. 15 Pro" onKeyDown={function onKeyDown} ...>
+                                  <input
+                                    ref={null}
+                                    className="h-10 w-full rounded-[10px] border border-border-strong bg-surface px-3 ..."
+                                    id="f-q"
+                                    defaultValue=""
+                                    placeholder="e.g. 15 Pro"
+                                    onKeyDown={function onKeyDown}
+                                    onBlur={function onBlur}
+-                                   style={{caret-color:"transparent"}}
+                                  >
+                              ...
+                            <label className="mt-3 inlin...">
+                              <input
+                                type="checkbox"
+                                className="accent-[var(--accent)]"
+                                checked={false}
+                                onChange={function onChange}
+-                               style={{caret-color:"transparent"}}
+                              >
+                              ...
+                      ...
+                ...
+              ...
+ 
+ GET /login 200 in 1398ms (next.js: 15ms, application-code: 1383ms)
+ POST /login 200 in 2.8s (next.js: 14ms, application-code: 2.8s)
+  └─ ƒ loginAction({"email":"kwame@example.com","password":"Customer123!"}, undefined) in 1101ms src/app/actions/auth.ts
+ GET /account 200 in 3.4s (next.js: 1479ms, proxy.ts: 110ms, application-code: 1786ms)
+ GET /account 200 in 1769ms (next.js: 49ms, proxy.ts: 35ms, application-code: 1685ms)
+ POST /login?next=%2Faccount 200 in 2.3s (next.js: 45ms, application-code: 2.3s)
+  └─ ƒ loginAction({"email":"support@ipayghana.test","password":"Admin12345!"}, "/account") in 1271ms src/app/actions/auth.ts
+ GET /admin 200 in 2.1s (next.js: 182ms, proxy.ts: 16ms, application-code: 1852ms)
+ GET /admin 200 in 2.1s (next.js: 85ms, proxy.ts: 27ms, application-code: 1938ms)
+ GET /admin/customers 200 in 2.6s (next.js: 504ms, proxy.ts: 34ms, application-code: 2.1s)
+ GET /admin/payments 200 in 2.8s (next.js: 183ms, proxy.ts: 22ms, application-code: 2.6s)
+ GET /admin/orders 200 in 3.3s (next.js: 397ms, proxy.ts: 195ms, application-code: 2.8s)
+ GET / 200 in 2.3s (next.js: 14ms, application-code: 2.3s)
+ POST / 200 in 368ms (next.js: 17ms, application-code: 351ms)
+  └─ ƒ trackImpressionAction("6ad57a95e8d04a6204ac24da") in 189ms src/app/actions/public.ts
+ POST / 200 in 361ms (next.js: 5ms, application-code: 355ms)
+  └─ ƒ trackImpressionAction("6ad57a95e8d04a6204ac24db") in 270ms src/app/actions/public.ts
+ POST /shop 200 in 462ms (next.js: 4ms, application-code: 458ms)
+ GET /shop 200 in 2.9s (next.js: 11ms, application-code: 2.9s)
+ GET /products/iphone-13-128gb-uk-used 200 in 3.0s (next.js: 171ms, application-code: 2.8s)
+ GET /admin 200 in 2.7s (next.js: 59ms, proxy.ts: 49ms, application-code: 2.6s)
+ GET /login 200 in 796ms (next.js: 27ms, application-code: 769ms)
+ POST /login 200 in 3.0s (next.js: 6ms, application-code: 3.0s)
+  └─ ƒ loginAction({"email":"kwame@example.com","password":"Customer123!"}, undefined) in 1232ms src/app/actions/auth.ts
+ GET /account 200 in 2.0s (next.js: 266ms, proxy.ts: 18ms, application-code: 1717ms)
+ GET /account 200 in 1386ms (next.js: 137ms, proxy.ts: 27ms, application-code: 1222ms)
+ GET /login 200 in 537ms (next.js: 5ms, application-code: 532ms)
+ POST /login 200 in 2.3s (next.js: 8ms, application-code: 2.3s)
+  └─ ƒ loginAction({"email":"kwame@example.com","password":"Customer123!"}, undefined) in 1407ms src/app/actions/auth.ts
+ GET /account 200 in 1392ms (next.js: 141ms, proxy.ts: 13ms, application-code: 1238ms)
+ GET /account 200 in 1052ms (next.js: 27ms, proxy.ts: 23ms, application-code: 1002ms)
+ GET /account 200 in 2.9s (next.js: 50ms, proxy.ts: 26ms, application-code: 2.8s)
+ GET /account/orders 200 in 3.2s (next.js: 1229ms, proxy.ts: 14ms, application-code: 1908ms)
+ GET /account/payments 200 in 4.2s (next.js: 970ms, proxy.ts: 17ms, application-code: 3.3s)
+ GET /account/installments 200 in 7.0s (next.js: 1065ms, proxy.ts: 22ms, application-code: 5.9s)
+ GET /account/profile 200 in 3.8s (next.js: 1558ms, proxy.ts: 103ms, application-code: 2.2s)
+ GET /account/notifications 200 in 6.2s (next.js: 3.1s, proxy.ts: 751ms, application-code: 2.3s)
+ GET / 200 in 3.1s (next.js: 6ms, application-code: 3.1s)
+ POST / 200 in 382ms (next.js: 20ms, application-code: 362ms)
+  └─ ƒ trackImpressionAction("6ad57a95e8d04a6204ac24da") in 238ms src/app/actions/public.ts
+ GET /shop 200 in 2.7s (next.js: 27ms, application-code: 2.7s)
+✓ Compiled in 911ms
+ GET /admin 200 in 2.1s (next.js: 412ms, proxy.ts: 15ms, application-code: 1637ms)
+ GET /login 200 in 783ms (next.js: 8ms, application-code: 774ms)
+ POST /login 200 in 2.2s (next.js: 6ms, application-code: 2.2s)
+  └─ ƒ loginAction({"email":"ama@example.com","password":"Customer123!"}, undefined) in 1363ms src/app/actions/auth.ts
+ GET /account 200 in 2.2s (next.js: 142ms, proxy.ts: 12ms, application-code: 2.1s)
+ GET /account 200 in 1884ms (next.js: 21ms, proxy.ts: 14ms, application-code: 1849ms)
+ GET /account 200 in 2.9s (next.js: 49ms, proxy.ts: 15ms, application-code: 2.8s)
+ GET /account/orders 200 in 2.2s (next.js: 471ms, proxy.ts: 15ms, application-code: 1721ms)
+ GET /account/payments 200 in 2.3s (next.js: 307ms, proxy.ts: 17ms, application-code: 2.0s)
+ GET /account/installments 200 in 3.9s (next.js: 217ms, proxy.ts: 17ms, application-code: 3.6s)
+ GET /admin 200 in 4.5s (next.js: 334ms, proxy.ts: 93ms, application-code: 4.1s)
+ GET /account/profile 200 in 3.6s (next.js: 150ms, proxy.ts: 24ms, application-code: 3.4s)
+ GET /account/notifications 200 in 5.4s (next.js: 2.6s, proxy.ts: 50ms, application-code: 2.7s)
+ GET / 200 in 4.6s (next.js: 6ms, application-code: 4.6s)
+ POST / 200 in 3.5s (next.js: 4ms, application-code: 3.5s)
+  └─ ƒ trackImpressionAction("6ad57a95e8d04a6204ac24da") in 194ms src/app/actions/public.ts
+ GET /shop 200 in 4.8s (next.js: 7ms, application-code: 4.8s)
+ GET /products/iphone-13-128gb-uk-used 200 in 3.9s (next.js: 37ms, application-code: 3.9s)
+ GET /admin/orders 200 in 7.6s (next.js: 1212ms, proxy.ts: 87ms, application-code: 6.3s)
+ GET /admin/payments 200 in 5.0s (next.js: 1091ms, proxy.ts: 18ms, application-code: 3.9s)
+ GET /login 200 in 1262ms (next.js: 9ms, application-code: 1253ms)
+ POST /login 200 in 2.5s (next.js: 6ms, application-code: 2.5s)
+  └─ ƒ loginAction({"email":"admin@ipayghana.test","password":"Admin12345!"}, undefined) in 1268ms src/app/actions/auth.ts
+ GET /admin 200 in 11.6s (next.js: 2.4s, proxy.ts: 21ms, application-code: 9.2s)
+ GET /admin 200 in 8.7s (next.js: 1009ms, proxy.ts: 232ms, application-code: 7.5s)
+ GET /admin/installments 200 in 10.4s (next.js: 1439ms, proxy.ts: 71ms, application-code: 8.9s)
+ GET /admin 200 in 7.8s (next.js: 1457ms, proxy.ts: 211ms, application-code: 6.1s)
+ GET /admin/installments 200 in 12.0s (next.js: 4.2s, proxy.ts: 515ms, application-code: 7.3s)
+ GET /admin/products 200 in 5.5s (next.js: 1276ms, proxy.ts: 51ms, application-code: 4.1s)
+ GET /admin/orders 200 in 6.3s (next.js: 2.5s, proxy.ts: 90ms, application-code: 3.8s)
+ GET /admin/orders/6ad57a47e8d04a6204ac2440 200 in 8.5s (next.js: 3.2s, proxy.ts: 122ms, application-code: 5.2s)
+ GET /admin/customers 200 in 7.1s (next.js: 1462ms, proxy.ts: 134ms, application-code: 5.5s)
+ GET /admin/payments 200 in 5.8s (next.js: 1698ms, proxy.ts: 622ms, application-code: 3.5s)
+ GET /admin/installments 200 in 8.2s (next.js: 3.0s, proxy.ts: 219ms, application-code: 5.0s)
+ GET /admin/promotions 200 in 2.8s (next.js: 1210ms, proxy.ts: 141ms, application-code: 1428ms)
+ GET /admin/reports 200 in 4.1s (next.js: 511ms, proxy.ts: 19ms, application-code: 3.6s)
+ GET /admin/plans 200 in 3.9s (next.js: 2.3s, proxy.ts: 16ms, application-code: 1584ms)
+ GET /admin/settings 200 in 1921ms (next.js: 528ms, proxy.ts: 19ms, application-code: 1374ms)
+ POST /products/iphone-13-128gb-uk-used 200 in 2.1s (next.js: 29ms, application-code: 2.1s)
+  └─ ƒ logoutAction() in 203ms src/app/actions/auth.ts
+ GET / 200 in 3.5s (next.js: 7ms, application-code: 3.5s)
+ POST / 200 in 801ms (next.js: 10ms, application-code: 790ms)
+  └─ ƒ trackImpressionAction("6ad57a95e8d04a6204ac24da") in 329ms src/app/actions/public.ts
+ GET /login?next=%2Faccount 200 in 1328ms (next.js: 38ms, application-code: 1290ms)
+ GET /admin 200 in 2.7s (next.js: 438ms, proxy.ts: 22ms, application-code: 2.3s)
+ POST /admin 200 in 1158ms (next.js: 581ms, proxy.ts: 15ms, application-code: 562ms)
+  └─ ƒ logoutAction() in 403ms src/app/actions/auth.ts
+ GET /login?next=%2Fadmin 200 in 1013ms (next.js: 132ms, application-code: 881ms)
+ GET /login?next=%2Fadmin 200 in 620ms (next.js: 90ms, application-code: 530ms)
+ GET / 200 in 4.4s (next.js: 5ms, application-code: 4.4s)
+ POST / 200 in 723ms (next.js: 8ms, application-code: 715ms)
+  └─ ƒ trackImpressionAction("6ad57a95e8d04a6204ac24da") in 606ms src/app/actions/public.ts
+ GET /login?next=%2Fadmin 200 in 1197ms (next.js: 28ms, application-code: 1169ms)
+ GET /login 200 in 604ms (next.js: 5ms, application-code: 600ms)
+ POST /login 200 in 2.9s (next.js: 8ms, application-code: 2.9s)
+  └─ ƒ loginAction({"email":"ama@example.com","password":"Customer123!"}, undefined) in 1271ms src/app/actions/auth.ts
+ GET /account 200 in 1625ms (next.js: 110ms, proxy.ts: 12ms, application-code: 1502ms)
+ GET /account 200 in 1530ms (next.js: 40ms, proxy.ts: 38ms, application-code: 1452ms)
+ GET /login 200 in 824ms (next.js: 6ms, application-code: 818ms)
+ POST /login 200 in 2.3s (next.js: 4ms, application-code: 2.3s)
+  └─ ƒ loginAction({"email":"ama@example.com","password":"Customer123!"}, undefined) in 1115ms src/app/actions/auth.ts
+ GET /account 200 in 2.3s (next.js: 96ms, proxy.ts: 9ms, application-code: 2.2s)
+ GET /account 200 in 1966ms (next.js: 35ms, proxy.ts: 15ms, application-code: 1917ms)
+✓ Compiled in 637ms
+ GET /admin/orders/6ad57a47e8d04a6204ac2440 200 in 2.6s (next.js: 453ms, proxy.ts: 16ms, application-code: 2.2s)
+ GET /login 200 in 934ms (next.js: 31ms, application-code: 904ms)
+ POST /login 200 in 2.7s (next.js: 4ms, application-code: 2.7s)
+  └─ ƒ loginAction({"email":"ama@example.com","password":"Customer123!"}, undefined) in 1269ms src/app/actions/auth.ts
+ GET /account 200 in 2.7s (next.js: 179ms, proxy.ts: 15ms, application-code: 2.5s)
+ GET /account 200 in 3.3s (next.js: 38ms, proxy.ts: 15ms, application-code: 3.3s)
+ GET /account 200 in 2.5s (next.js: 63ms, proxy.ts: 31ms, application-code: 2.4s)
+[browser] Image with src "/images/devices/iphone-13-midnight.svg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+ GET /account/orders 200 in 1761ms (next.js: 174ms, proxy.ts: 16ms, application-code: 1571ms)
+ GET /account/orders/6ad57a47e8d04a6204ac2440 200 in 5.3s (next.js: 801ms, proxy.ts: 21ms, application-code: 4.4s)
+ GET /account/orders/6ad57a47e8d04a6204ac2440/statement 200 in 6.5s (next.js: 1639ms, proxy.ts: 17ms, application-code: 4.8s)
+ GET /account/payments 200 in 4.8s (next.js: 1433ms, proxy.ts: 160ms, application-code: 3.2s)
+ GET /account/installments 200 in 3.9s (next.js: 574ms, proxy.ts: 16ms, application-code: 3.3s)
+ GET /account/profile 200 in 1537ms (next.js: 188ms, proxy.ts: 19ms, application-code: 1331ms)
+ GET /account/notifications 200 in 1720ms (next.js: 236ms, proxy.ts: 17ms, application-code: 1467ms)
+ GET /account 200 in 2.8s (next.js: 180ms, proxy.ts: 15ms, application-code: 2.6s)
+[browser] Image with src "/images/devices/iphone-13-midnight.svg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+ GET /login 200 in 962ms (next.js: 6ms, application-code: 956ms)
+ POST /login 200 in 2.1s (next.js: 5ms, application-code: 2.1s)
+  └─ ƒ loginAction({"email":"kwame@example.com","password":"Customer123!"}, undefined) in 991ms src/app/actions/auth.ts
+ GET /account 200 in 1742ms (next.js: 128ms, proxy.ts: 11ms, application-code: 1602ms)
+ GET /account 200 in 1432ms (next.js: 58ms, proxy.ts: 15ms, application-code: 1358ms)
+ GET /account 200 in 2.0s (next.js: 54ms, proxy.ts: 24ms, application-code: 1949ms)
+ GET /account/orders 200 in 1897ms (next.js: 558ms, proxy.ts: 15ms, application-code: 1324ms)
+ GET /account/orders/6ad57a69e8d04a6204ac2476/statement 200 in 2.5s (next.js: 214ms, proxy.ts: 19ms, application-code: 2.2s)
+ GET /account/orders/6ad57a69e8d04a6204ac2476/statement/statement 404 in 3.2s (next.js: 2.5s, proxy.ts: 19ms, application-code: 710ms)
+ GET /account/payments 200 in 3.8s (next.js: 328ms, proxy.ts: 89ms, application-code: 3.4s)
+ GET /account/installments 200 in 3.9s (next.js: 255ms, proxy.ts: 17ms, application-code: 3.6s)
+ GET /account/profile 200 in 1901ms (next.js: 332ms, proxy.ts: 32ms, application-code: 1537ms)
+ GET /account/notifications 200 in 1423ms (next.js: 164ms, proxy.ts: 16ms, application-code: 1243ms)
+ GET /login 200 in 1143ms (next.js: 8ms, application-code: 1135ms)
+ POST /login 200 in 2.3s (next.js: 5ms, application-code: 2.2s)
+  └─ ƒ loginAction({"email":"efua@example.com","password":"Customer123!"}, undefined) in 1197ms src/app/actions/auth.ts
+ GET /account 200 in 1428ms (next.js: 78ms, proxy.ts: 15ms, application-code: 1335ms)
+ GET /account 200 in 1418ms (next.js: 28ms, proxy.ts: 18ms, application-code: 1373ms)
+ GET /account 200 in 3.0s (next.js: 52ms, proxy.ts: 18ms, application-code: 2.9s)
+ GET /account/orders 200 in 1811ms (next.js: 146ms, proxy.ts: 16ms, application-code: 1649ms)
+ GET /account/orders/6ad57a82e8d04a6204ac24a8 200 in 5.1s (next.js: 190ms, proxy.ts: 18ms, application-code: 4.9s)
+ GET /account/orders/6ad57a82e8d04a6204ac24a8/statement 200 in 3.2s (next.js: 230ms, proxy.ts: 15ms, application-code: 2.9s)
+ GET /account/payments 200 in 3.9s (next.js: 764ms, proxy.ts: 14ms, application-code: 3.1s)
+ GET /account/installments 200 in 4.6s (next.js: 293ms, proxy.ts: 16ms, application-code: 4.3s)
+ GET /account/profile 200 in 2.6s (next.js: 770ms, proxy.ts: 15ms, application-code: 1847ms)
+ GET /account/notifications 200 in 1609ms (next.js: 133ms, proxy.ts: 17ms, application-code: 1458ms)
+ GET /login 200 in 983ms (next.js: 6ms, application-code: 978ms)
+ POST /login 200 in 2.1s (next.js: 5ms, application-code: 2.1s)
+  └─ ƒ loginAction({"email":"yaw@example.com","password":"Customer123!"}, undefined) in 1231ms src/app/actions/auth.ts
+ GET /account 200 in 1496ms (next.js: 130ms, proxy.ts: 17ms, application-code: 1349ms)
+ GET /account 200 in 1266ms (next.js: 26ms, proxy.ts: 18ms, application-code: 1222ms)
+ GET /account 200 in 1839ms (next.js: 33ms, proxy.ts: 18ms, application-code: 1787ms)
+[browser] Image with src "/images/devices/iphone-13-midnight.svg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+ GET /account/orders 200 in 3.5s (next.js: 1709ms, proxy.ts: 106ms, application-code: 1654ms)
+ GET /account/orders/6ad57a92e8d04a6204ac24d4 200 in 2.6s (next.js: 485ms, proxy.ts: 24ms, application-code: 2.1s)
+ GET /account/orders/6ad57a92e8d04a6204ac24d4/statement 404 in 3.7s (next.js: 583ms, proxy.ts: 17ms, application-code: 3.1s)
+ GET /account/payments 200 in 2.3s (next.js: 263ms, proxy.ts: 15ms, application-code: 2.1s)
+ GET /account/installments 200 in 2.5s (next.js: 261ms, proxy.ts: 15ms, application-code: 2.2s)
+ GET /account/profile 200 in 1664ms (next.js: 149ms, proxy.ts: 15ms, application-code: 1499ms)
+ GET /account/notifications 200 in 1635ms (next.js: 124ms, proxy.ts: 15ms, application-code: 1495ms)
+ GET /login 200 in 611ms (next.js: 5ms, application-code: 606ms)
+ POST /login 200 in 2.3s (next.js: 9ms, application-code: 2.3s)
+  └─ ƒ loginAction({"email":"ama@example.com","password":"Customer123!"}, undefined) in 1177ms src/app/actions/auth.ts
+ GET /account 200 in 1596ms (next.js: 133ms, proxy.ts: 18ms, application-code: 1445ms)
+ GET /account 200 in 1516ms (next.js: 29ms, proxy.ts: 54ms, application-code: 1434ms)
+ GET /account/orders/6ad57a47e8d04a6204ac2440 200 in 4.0s (next.js: 398ms, proxy.ts: 18ms, application-code: 3.6s)
+ GET /login 200 in 1445ms (next.js: 6ms, application-code: 1440ms)
+ POST /login 200 in 2.6s (next.js: 7ms, application-code: 2.6s)
+  └─ ƒ loginAction({"email":"efua@example.com","password":"Customer123!"}, undefined) in 1476ms src/app/actions/auth.ts
+ GET /account 200 in 1450ms (next.js: 25ms, proxy.ts: 14ms, application-code: 1411ms)
+ GET /account 200 in 1661ms (next.js: 29ms, proxy.ts: 15ms, application-code: 1617ms)
+ GET /account 200 in 2.3s (next.js: 160ms, proxy.ts: 23ms, application-code: 2.1s)
+✓ Compiled in 709ms
+ GET /admin/orders/6ad57a47e8d04a6204ac2440 200 in 3.4s (next.js: 535ms, proxy.ts: 20ms, application-code: 2.8s)
+✓ Compiled in 656ms
+ GET /admin/orders/6ad57a47e8d04a6204ac2440 200 in 3.8s (next.js: 540ms, proxy.ts: 12ms, application-code: 3.2s)
+ GET /login 200 in 866ms (next.js: 8ms, application-code: 858ms)
+ POST /login 200 in 2.4s (next.js: 5ms, application-code: 2.4s)
+  └─ ƒ loginAction({"email":"ama@example.com","password":"Customer123!"}, undefined) in 1123ms src/app/actions/auth.ts
+ GET /account 200 in 2.7s (next.js: 314ms, proxy.ts: 225ms, application-code: 2.1s)
+ GET /account 200 in 1654ms (next.js: 65ms, proxy.ts: 19ms, application-code: 1570ms)
+ GET /account/orders 200 in 2.4s (next.js: 327ms, proxy.ts: 20ms, application-code: 2.0s)
+ GET /account 200 in 3.7s (next.js: 826ms, proxy.ts: 18ms, application-code: 2.8s)
+[browser] Image with src "/images/devices/iphone-13-midnight.svg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+ GET /account/orders 200 in 1920ms (next.js: 355ms, proxy.ts: 14ms, application-code: 1551ms)
+ GET /account/payments 200 in 2.7s (next.js: 357ms, proxy.ts: 18ms, application-code: 2.3s)
+ GET /account/installments 200 in 2.5s (next.js: 185ms, proxy.ts: 17ms, application-code: 2.3s)
+ GET /account/profile 200 in 1853ms (next.js: 182ms, proxy.ts: 18ms, application-code: 1653ms)
+ GET /account/notifications 200 in 1528ms (next.js: 106ms, proxy.ts: 14ms, application-code: 1408ms)
+ GET /account/orders/6ad57a47e8d04a6204ac2440 200 in 5.1s (next.js: 199ms, proxy.ts: 18ms, application-code: 4.9s)
+ GET /account/orders/6ad57a47e8d04a6204ac2440/statement 200 in 4.0s (next.js: 642ms, proxy.ts: 18ms, application-code: 3.4s)
+ GET /login 200 in 711ms (next.js: 6ms, application-code: 705ms)
+ POST /login 200 in 2.1s (next.js: 5ms, application-code: 2.1s)
+  └─ ƒ loginAction({"email":"kwame@example.com","password":"Customer123!"}, undefined) in 1134ms src/app/actions/auth.ts
+ GET /account 200 in 1215ms (next.js: 99ms, proxy.ts: 11ms, application-code: 1104ms)
+ GET /account 200 in 1153ms (next.js: 32ms, proxy.ts: 16ms, application-code: 1105ms)
+ GET /account/orders 200 in 1728ms (next.js: 246ms, proxy.ts: 20ms, application-code: 1462ms)
+ GET /account 200 in 1666ms (next.js: 31ms, proxy.ts: 16ms, application-code: 1619ms)
+ GET /account/orders 200 in 1906ms (next.js: 54ms, proxy.ts: 19ms, application-code: 1832ms)
+ GET /account/payments 200 in 2.7s (next.js: 704ms, proxy.ts: 18ms, application-code: 1972ms)
+ GET /account/installments 200 in 3.4s (next.js: 340ms, proxy.ts: 19ms, application-code: 3.1s)
+ GET /account/profile 200 in 1753ms (next.js: 209ms, proxy.ts: 19ms, application-code: 1525ms)
+ GET /account/notifications 200 in 1524ms (next.js: 114ms, proxy.ts: 18ms, application-code: 1393ms)
+ GET /account/orders/6ad57a69e8d04a6204ac2476 200 in 4.0s (next.js: 170ms, proxy.ts: 17ms, application-code: 3.9s)
+ GET /account/orders/6ad57a69e8d04a6204ac2476/statement 200 in 3.3s (next.js: 1022ms, proxy.ts: 16ms, application-code: 2.3s)
+ GET /login 200 in 1089ms (next.js: 28ms, application-code: 1060ms)
+ POST /login 200 in 2.1s (next.js: 8ms, application-code: 2.1s)
+  └─ ƒ loginAction({"email":"efua@example.com","password":"Customer123!"}, undefined) in 1182ms src/app/actions/auth.ts
+ GET /account 200 in 1884ms (next.js: 37ms, proxy.ts: 64ms, application-code: 1783ms)
+ GET /account 200 in 2.5s (next.js: 181ms, proxy.ts: 9ms, application-code: 2.4s)
+ GET /account/orders 200 in 1999ms (next.js: 383ms, proxy.ts: 22ms, application-code: 1594ms)
+ GET /account 200 in 2.6s (next.js: 56ms, proxy.ts: 15ms, application-code: 2.5s)
+ GET /account/orders 200 in 2.4s (next.js: 807ms, proxy.ts: 22ms, application-code: 1525ms)
+ GET /account/payments 200 in 2.8s (next.js: 430ms, proxy.ts: 20ms, application-code: 2.3s)
+ GET /account/installments 200 in 4.7s (next.js: 1168ms, proxy.ts: 19ms, application-code: 3.5s)
+ GET /account/profile 200 in 2.8s (next.js: 807ms, proxy.ts: 21ms, application-code: 2.0s)
+ GET /account/notifications 200 in 1766ms (next.js: 238ms, proxy.ts: 16ms, application-code: 1512ms)
+ GET /account/orders/6ad57a82e8d04a6204ac24a8 200 in 6.6s (next.js: 343ms, proxy.ts: 17ms, application-code: 6.2s)
+ GET /account/orders/6ad57a82e8d04a6204ac24a8/statement 200 in 3.5s (next.js: 1047ms, proxy.ts: 19ms, application-code: 2.4s)
+ GET /login 200 in 1489ms (next.js: 5ms, application-code: 1485ms)
+ POST /login 200 in 2.3s (next.js: 5ms, application-code: 2.3s)
+  └─ ƒ loginAction({"email":"yaw@example.com","password":"Customer123!"}, undefined) in 1150ms src/app/actions/auth.ts
+ GET /account 200 in 1813ms (next.js: 166ms, proxy.ts: 14ms, application-code: 1633ms)
+ GET /account 200 in 1514ms (next.js: 59ms, proxy.ts: 15ms, application-code: 1440ms)
+ GET /account/orders 200 in 2.2s (next.js: 261ms, proxy.ts: 24ms, application-code: 1931ms)
+ GET /account 200 in 2.9s (next.js: 853ms, proxy.ts: 20ms, application-code: 2000ms)
+[browser] Image with src "/images/devices/iphone-13-midnight.svg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+ GET /account/orders 200 in 2.5s (next.js: 413ms, proxy.ts: 17ms, application-code: 2.1s)
+ GET /account/payments 200 in 3.0s (next.js: 1074ms, proxy.ts: 15ms, application-code: 1864ms)
+ GET /account/installments 200 in 3.0s (next.js: 835ms, proxy.ts: 16ms, application-code: 2.1s)
+ GET /account/profile 200 in 1730ms (next.js: 142ms, proxy.ts: 18ms, application-code: 1570ms)
+ GET /account/notifications 200 in 1607ms (next.js: 155ms, proxy.ts: 27ms, application-code: 1425ms)
+ GET /account/orders/6ad57a92e8d04a6204ac24d4 200 in 3.0s (next.js: 257ms, proxy.ts: 21ms, application-code: 2.8s)
+ GET /account/orders/6ad57a92e8d04a6204ac24d4/statement 404 in 6.0s (next.js: 1797ms, proxy.ts: 18ms, application-code: 4.2s)
+ GET /login 200 in 1859ms (next.js: 39ms, application-code: 1820ms)
+ POST /login 200 in 2.1s (next.js: 4ms, application-code: 2.1s)
+  └─ ƒ loginAction({"email":"superadmin@ipayghana.test","password":"Admin12345!"}, undefined) in 1250ms src/app/actions/auth.ts
+ GET /admin 200 in 2.8s (next.js: 207ms, proxy.ts: 15ms, application-code: 2.6s)
+ GET /admin 200 in 2.7s (next.js: 80ms, proxy.ts: 48ms, application-code: 2.6s)
+ GET /admin/orders 200 in 5.9s (next.js: 1331ms, proxy.ts: 35ms, application-code: 4.5s)
+ GET /admin 200 in 6.0s (next.js: 2.0s, proxy.ts: 27ms, application-code: 3.9s)
+ GET /admin/products 200 in 5.9s (next.js: 923ms, proxy.ts: 18ms, application-code: 5.0s)
+ GET /admin/products/new 200 in 3.1s (next.js: 1390ms, proxy.ts: 17ms, application-code: 1692ms)
+ GET /admin/orders 200 in 4.6s (next.js: 587ms, proxy.ts: 15ms, application-code: 4.0s)
+ GET /admin/customers 200 in 3.2s (next.js: 347ms, proxy.ts: 18ms, application-code: 2.8s)
+ GET /admin/payments 200 in 4.0s (next.js: 210ms, proxy.ts: 17ms, application-code: 3.7s)
+ GET /admin/installments 200 in 4.2s (next.js: 174ms, proxy.ts: 19ms, application-code: 4.0s)
+ GET /admin/promotions 200 in 1329ms (next.js: 196ms, proxy.ts: 12ms, application-code: 1121ms)
+ GET /admin/promotions/new 200 in 1393ms (next.js: 288ms, proxy.ts: 14ms, application-code: 1091ms)
+ GET /admin/plans 200 in 2.6s (next.js: 529ms, proxy.ts: 16ms, application-code: 2.0s)
+ GET /admin/plans/new 200 in 2.1s (next.js: 441ms, proxy.ts: 18ms, application-code: 1632ms)
+ GET /admin/reports 200 in 4.4s (next.js: 489ms, proxy.ts: 15ms, application-code: 3.9s)
+ GET /admin/notifications 200 in 5.7s (next.js: 1524ms, proxy.ts: 17ms, application-code: 4.2s)
+ GET /admin/staff 200 in 4.1s (next.js: 1629ms, proxy.ts: 18ms, application-code: 2.5s)
+ GET /admin/audit-logs 200 in 3.9s (next.js: 891ms, proxy.ts: 19ms, application-code: 2.9s)
+ GET /admin/settings 200 in 2.3s (next.js: 485ms, proxy.ts: 25ms, application-code: 1758ms)
+ GET /admin/security 200 in 1747ms (next.js: 472ms, proxy.ts: 31ms, application-code: 1245ms)
+ GET /admin/orders/6ad57a92e8d04a6204ac24d4 200 in 4.4s (next.js: 794ms, proxy.ts: 21ms, application-code: 3.6s)
+ GET /admin/orders/6ad57a82e8d04a6204ac24a8 200 in 6.5s (next.js: 39ms, proxy.ts: 20ms, application-code: 6.4s)
+ GET / 200 in 3.4s (next.js: 21ms, application-code: 3.3s)
+ POST / 200 in 1421ms (next.js: 13ms, application-code: 1408ms)
+  └─ ƒ trackImpressionAction("6ad57a95e8d04a6204ac24da") in 793ms src/app/actions/public.ts
+ GET /shop 200 in 3.3s (next.js: 5ms, application-code: 3.3s)
+ POST / 200 in 1948ms (next.js: 32ms, application-code: 1916ms)
+  └─ ƒ trackImpressionAction("6ad57a95e8d04a6204ac24db") in 999ms src/app/actions/public.ts
+ GET /products/iphone-13-128gb-uk-used 200 in 2.3s (next.js: 37ms, application-code: 2.3s)
+ GET /how-it-works 200 in 2.4s (next.js: 53ms, application-code: 2.3s)
+ GET /promotions 200 in 3.1s (next.js: 133ms, application-code: 3.0s)
+ GET /faq 200 in 1986ms (next.js: 84ms, application-code: 1902ms)
+ GET /contact 200 in 1865ms (next.js: 159ms, application-code: 1706ms)
+ GET /login 200 in 2.3s (next.js: 12ms, application-code: 2.3s)
+ GET /register 200 in 1797ms (next.js: 35ms, application-code: 1763ms)
+ GET /login 200 in 787ms (next.js: 5ms, application-code: 782ms)
+ POST /login 200 in 3.9s (next.js: 5ms, application-code: 3.9s)
+  └─ ƒ loginAction({"email":"ama@example.com","password":"Customer123!"}, undefined) in 1425ms src/app/actions/auth.ts
+ GET /account 200 in 2.6s (next.js: 386ms, proxy.ts: 49ms, application-code: 2.1s)
+ GET /account 200 in 1943ms (next.js: 100ms, proxy.ts: 28ms, application-code: 1816ms)
+ GET /account/orders/6ad57a47e8d04a6204ac2440 200 in 4.8s (next.js: 551ms, proxy.ts: 20ms, application-code: 4.2s)
+✓ Compiled in 416ms
+ GET /admin/orders/6ad57a47e8d04a6204ac2440 200 in 4.8s (next.js: 1061ms, proxy.ts: 15ms, application-code: 3.7s)
+ GET /login 200 in 1172ms (next.js: 35ms, application-code: 1137ms)
+ POST /login 200 in 2.6s (next.js: 7ms, application-code: 2.6s)
+  └─ ƒ loginAction({"email":"ama@example.com","password":"Customer123!"}, undefined) in 1113ms src/app/actions/auth.ts
+ GET /account 200 in 2.2s (next.js: 178ms, proxy.ts: 16ms, application-code: 2.0s)
+ GET /account 200 in 1835ms (next.js: 32ms, proxy.ts: 16ms, application-code: 1788ms)
+ GET /account/orders 200 in 2.5s (next.js: 850ms, proxy.ts: 26ms, application-code: 1633ms)
+ GET /account/orders/6ad57a47e8d04a6204ac2440 200 in 4.8s (next.js: 355ms, proxy.ts: 17ms, application-code: 4.4s)
+ GET /account/orders/6ad57a47e8d04a6204ac2440 200 in 3.3s (next.js: 47ms, proxy.ts: 17ms, application-code: 3.3s)
+ GET /login 200 in 917ms (next.js: 5ms, application-code: 913ms)
+ POST /login 200 in 2.8s (next.js: 5ms, application-code: 2.8s)
+  └─ ƒ loginAction({"email":"kwame@example.com","password":"Customer123!"}, undefined) in 1515ms src/app/actions/auth.ts
+ GET /account 200 in 1756ms (next.js: 162ms, proxy.ts: 42ms, application-code: 1552ms)
+ GET /account 200 in 1292ms (next.js: 33ms, proxy.ts: 12ms, application-code: 1246ms)
+ GET /account/orders 200 in 1871ms (next.js: 124ms, proxy.ts: 16ms, application-code: 1731ms)
+ GET /account/orders/6ad57a69e8d04a6204ac2476 200 in 5.4s (next.js: 52ms, proxy.ts: 18ms, application-code: 5.3s)
+ GET /login 200 in 1595ms (next.js: 32ms, application-code: 1563ms)
+ POST /login 200 in 2.5s (next.js: 6ms, application-code: 2.5s)
+  └─ ƒ loginAction({"email":"efua@example.com","password":"Customer123!"}, undefined) in 1092ms src/app/actions/auth.ts
+ GET /account 200 in 1941ms (next.js: 28ms, proxy.ts: 11ms, application-code: 1903ms)
+ GET /account 200 in 1919ms (next.js: 74ms, proxy.ts: 75ms, application-code: 1770ms)
+ GET /account/orders 200 in 1810ms (next.js: 51ms, proxy.ts: 26ms, application-code: 1733ms)
+ GET /account/orders/6ad57a82e8d04a6204ac24a8 200 in 7.3s (next.js: 63ms, proxy.ts: 17ms, application-code: 7.2s)
+ GET /login 200 in 1060ms (next.js: 5ms, application-code: 1055ms)
+ POST /login 200 in 3.6s (next.js: 12ms, application-code: 3.5s)
+  └─ ƒ loginAction({"email":"yaw@example.com","password":"Customer123!"}, undefined) in 2265ms src/app/actions/auth.ts
+ GET /account 200 in 4.1s (next.js: 1703ms, proxy.ts: 14ms, application-code: 2.4s)
+ GET /account 200 in 1763ms (next.js: 42ms, proxy.ts: 33ms, application-code: 1687ms)
+ GET /account/orders 200 in 4.1s (next.js: 1496ms, proxy.ts: 99ms, application-code: 2.6s)
+ GET /account/orders/6ad57a92e8d04a6204ac24d4 200 in 6.9s (next.js: 1152ms, proxy.ts: 116ms, application-code: 5.6s)
+ GET /admin/products 307 in 4.9s (next.js: 1249ms, proxy.ts: 22ms, application-code: 3.6s)
+ GET /admin?denied=1 200 in 5.2s (next.js: 1016ms, proxy.ts: 193ms, application-code: 4.0s)
+ GET / 200 in 3.4s (next.js: 16ms, application-code: 3.4s)
+ POST / 200 in 1399ms (next.js: 73ms, application-code: 1326ms)
+  └─ ƒ trackImpressionAction("6ad57a95e8d04a6204ac24da") in 1043ms src/app/actions/public.ts
+[browser] Image with src "/images/devices/iphone-17-pro-max-cosmic-orange.svg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+ GET /shop 200 in 3.3s (next.js: 14ms, application-code: 3.3s)
+ POST /admin?denied=1 200 in 3.1s (next.js: 2.3s, proxy.ts: 54ms, application-code: 731ms)
+  └─ ƒ logoutAction() in 242ms src/app/actions/auth.ts
+ GET /login?next=%2Fadmin 200 in 8.7s (next.js: 31ms, application-code: 8.7s)
+ GET /login?next=%2Fadmin 200 in 7.9s (next.js: 203ms, application-code: 7.7s)
+ GET / 200 in 12.2s (next.js: 19ms, application-code: 12.2s)
+ GET /products/iphone-13-128gb-uk-used 200 in 7.3s (next.js: 39ms, application-code: 7.3s)
+ GET /promotions 200 in 3.7s (next.js: 5ms, application-code: 3.7s)
+ POST / 200 in 855ms (next.js: 7ms, application-code: 848ms)
+  └─ ƒ trackImpressionAction("6ad57a95e8d04a6204ac24da") in 334ms src/app/actions/public.ts
+ GET /login 200 in 830ms (next.js: 12ms, application-code: 817ms)
+ GET /login 200 in 2.0s (next.js: 317ms, application-code: 1717ms)

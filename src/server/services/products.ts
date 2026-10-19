@@ -1,7 +1,7 @@
 import { Types } from "mongoose";
 import { z } from "zod";
 import { cediAmountSchema } from "@/lib/validation";
-import { InventoryMovement, Product } from "@/models";
+import { InventoryMovement, Order, Product, Promotion } from "@/models";
 import { type Actor, requirePermission } from "../auth/actor";
 import { connectDB, isDuplicateKeyError, withTransaction } from "../db";
 import { AppError } from "../errors";
@@ -140,24 +140,65 @@ export async function setProductFlags(
 }
 
 const stockSchema = z.object({
-  type: z.enum(["restock", "adjustment"]),
-  quantity: z.coerce.number().int().refine((n) => n !== 0, "Quantity cannot be zero"),
-  note: z.string().trim().min(3, "Add a note").max(300),
+  /** add: +quantity · remove: −quantity · set: make stock exactly `quantity` */
+  op: z.enum(["add", "remove", "set"]),
+  quantity: z.coerce.number({ error: "Enter a whole number" }).int("Enter a whole number").min(0, "Quantity cannot be negative").max(100_000),
+  note: z.string().trim().max(300).optional().default(""),
 });
 
-/** Restock or adjust inventory atomically; never allows stock below zero. */
-export async function adjustStock(actor: Actor, productId: string, input: unknown) {
+/**
+ * Change stock atomically and record an inventory movement. Stock can never go below zero.
+ * Units already reserved by orders were deducted when the order was placed, so "stock" is always units free to sell.
+ */
+export async function updateStock(actor: Actor, productId: string, input: unknown) {
   requirePermission(actor, "products.manage");
   const data = parseOrThrow(stockSchema, input);
-  if (data.type === "restock" && data.quantity < 0) throw new AppError("VALIDATION", "Restock quantity must be positive.");
   if (!Types.ObjectId.isValid(productId)) throw new AppError("NOT_FOUND", "Product not found.");
+  if (data.op !== "set" && data.quantity === 0) throw new AppError("VALIDATION", "Enter a quantity greater than zero.", { fieldErrors: { quantity: ["Must be at least 1"] } });
+  if (data.op !== "add" && data.note.length < 3) {
+    throw new AppError("VALIDATION", "Add a short reason (e.g. damaged, stock count correction).", { fieldErrors: { note: ["A reason is required"] } });
+  }
   return withTransaction(async (session) => {
-    const filter: Record<string, unknown> = { _id: productId };
-    if (data.quantity < 0) filter.stockQuantity = { $gte: -data.quantity };
-    const p = await Product.findOneAndUpdate(filter, { $inc: { stockQuantity: data.quantity } }, { session, returnDocument: "after" });
-    if (!p) throw new AppError("VALIDATION", "Stock cannot go below zero.");
-    await InventoryMovement.create([{ productId: p._id, type: data.type, quantity: data.quantity, actorId: actor.userId, note: data.note, stockAfter: p.stockQuantity }], { session });
-    await audit(actor, "inventory.adjust", "Product", productId, { session, reason: data.note, metadata: { quantity: data.quantity, stockAfter: p.stockQuantity } });
-    return p;
+    const current = await Product.findById(productId).session(session).select("stockQuantity").lean();
+    if (!current) throw new AppError("NOT_FOUND", "Product not found.");
+    const delta = data.op === "add" ? data.quantity : data.op === "remove" ? -data.quantity : data.quantity - current.stockQuantity;
+    if (delta === 0) return { product: current, delta };
+    if (current.stockQuantity + delta < 0) {
+      throw new AppError("VALIDATION", `Only ${current.stockQuantity} in stock — you can't remove ${-delta}.`, { fieldErrors: { quantity: ["More than is in stock"] } });
+    }
+    // Conditional on the value we read, so a concurrent order reservation can't be overwritten.
+    const p = await Product.findOneAndUpdate(
+      { _id: productId, stockQuantity: current.stockQuantity },
+      { $inc: { stockQuantity: delta } },
+      { session, returnDocument: "after" },
+    );
+    if (!p) throw new AppError("CONFLICT", "Stock changed while you were editing. Please try again.");
+    const type = data.op === "add" ? "restock" : "adjustment";
+    const note = data.note || (data.op === "add" ? "Stock added" : "Stock updated");
+    await InventoryMovement.create([{ productId: p._id, type, quantity: delta, actorId: actor.userId, note: `${data.op === "set" ? "Set to " + data.quantity + " · " : ""}${note}`, stockAfter: p.stockQuantity }], { session });
+    await audit(actor, `inventory.${data.op}`, "Product", productId, { session, reason: note, metadata: { delta, stockBefore: current.stockQuantity, stockAfter: p.stockQuantity } });
+    return { product: p, delta };
   });
+}
+
+/**
+ * Permanently delete a product. Only allowed when no order has ever referenced it — otherwise archive it,
+ * so order history, reports and inventory records stay intact.
+ */
+export async function deleteProduct(actor: Actor, productId: string) {
+  requirePermission(actor, "products.manage");
+  if (!Types.ObjectId.isValid(productId)) throw new AppError("NOT_FOUND", "Product not found.");
+  await connectDB();
+  const product = await Product.findById(productId).lean();
+  if (!product) throw new AppError("NOT_FOUND", "Product not found.");
+  const orders = await Order.countDocuments({ productId: product._id });
+  if (orders > 0) {
+    throw new AppError("INVALID_STATE", `This product has ${orders} order${orders === 1 ? "" : "s"}, so it can't be deleted. Archive it instead — it disappears from the store but history is kept.`);
+  }
+  await withTransaction(async (session) => {
+    await Product.deleteOne({ _id: product._id }, { session });
+    await Promotion.updateMany({ linkedProductIds: product._id }, { $pull: { linkedProductIds: product._id } }, { session });
+    await audit(actor, "product.delete", "Product", productId, { session, metadata: { name: product.name, slug: product.slug, stockAtDeletion: product.stockQuantity } });
+  });
+  return { name: product.name };
 }

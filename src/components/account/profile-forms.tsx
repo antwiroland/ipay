@@ -140,7 +140,7 @@ export function VerificationForm({ next }: { next?: string }) {
           <Select id="v-type" value={v.documentType} onChange={(e) => setV({ ...v, documentType: e.target.value })}>
             <option value="ghana_card">Ghana Card</option>
             <option value="passport">Passport</option>
-            <option value="drivers_licence">Driver's licence</option>
+            <option value="drivers_licence">Driver&apos;s licence</option>
             <option value="voter_id">Voter ID</option>
           </Select>
         </Field>

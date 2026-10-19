@@ -21,7 +21,8 @@ export function ProductImage({
       alt={alt}
       fill
       sizes={sizes}
-      priority={priority}
+      loading={priority ? "eager" : "lazy"}
+      fetchPriority={priority ? "high" : undefined}
       unoptimized={src?.endsWith(".svg")}
       className={cn("object-contain", className)}
     />

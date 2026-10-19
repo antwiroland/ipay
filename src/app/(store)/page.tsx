@@ -101,7 +101,7 @@ export default async function HomePage() {
 
           <div className="relative mx-auto w-full max-w-[560px]">
             <div className="relative aspect-[16/15]">
-              <Image src={heroDevice?.image ?? "/images/devices/placeholder.svg"} alt={heroDevice?.imageAlt ?? "iPhone"} fill priority unoptimized className="object-contain" />
+              <Image src={heroDevice?.image ?? "/images/devices/placeholder.svg"} alt={heroDevice?.imageAlt ?? "iPhone"} fill loading="eager" fetchPriority="high" unoptimized className="object-contain" />
             </div>
             {heroDevice && (
               <div className="absolute bottom-6 left-0 w-60 animate-fade-up rounded-[16px] border border-border bg-surface/95 p-4 shadow-[var(--shadow-lift)] backdrop-blur [animation-delay:200ms] sm:-left-6">
@@ -320,7 +320,7 @@ export default async function HomePage() {
             <div>
               <h2 className="text-xl font-semibold tracking-tight">Need help choosing a plan?</h2>
               <p className="mt-1 text-[15px] text-muted">
-                Call {settings.supportPhone} or WhatsApp {settings.supportWhatsapp}. We're here Monday to Saturday, 8am–7pm.
+                Call {settings.supportPhone} or WhatsApp {settings.supportWhatsapp}. We&apos;re here Monday to Saturday, 8am–7pm.
               </p>
             </div>
           </div>

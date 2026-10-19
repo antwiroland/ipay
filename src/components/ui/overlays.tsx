@@ -41,7 +41,7 @@ export function SheetContent({ className, children, side = "right", title, ...pr
       <D.Overlay className="fixed inset-0 z-50 bg-[#0b1220]/40" />
       <D.Content
         className={cn(
-          "fixed top-0 bottom-0 z-50 flex w-[86%] max-w-sm flex-col bg-surface shadow-[var(--shadow-lift)] focus:outline-none",
+          "fixed top-0 bottom-0 z-50 flex w-[86%] max-w-sm flex-col overflow-hidden bg-surface shadow-[var(--shadow-lift)] focus:outline-none",
           side === "right" ? "right-0" : "left-0",
           className,
         )}

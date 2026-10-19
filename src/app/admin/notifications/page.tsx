@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/overlays";
 import { Card, CardContent, PageHeader, StatCard } from "@/components/ui/primitives";
 import { Table, TBody, TD, TH, THead, TR } from "@/components/ui/table";
-import { formatDateTime } from "@/lib/dates";
+import { daysAgo, formatDateTime } from "@/lib/dates";
 import { hasPermission } from "@/lib/permissions";
 import { ContactMessage, Notification, NotificationTemplate, User } from "@/models";
 import { NOTIFICATION_TEMPLATES } from "@/models/Notification";
@@ -26,7 +26,7 @@ export default async function NotificationsAdmin({ searchParams }: { searchParam
     Notification.countDocuments(f),
     NotificationTemplate.find().lean(),
     ContactMessage.find().sort({ status: 1, createdAt: -1 }).limit(50).lean(),
-    Notification.aggregate([{ $match: { channel: { $in: ["email", "sms"] }, createdAt: { $gte: new Date(Date.now() - 30 * 86400000) } } }, { $group: { _id: "$deliveryStatus", n: { $sum: 1 } } }]),
+    Notification.aggregate([{ $match: { channel: { $in: ["email", "sms"] }, createdAt: { $gte: daysAgo(30) } } }, { $group: { _id: "$deliveryStatus", n: { $sum: 1 } } }]),
   ]);
   const users = new Map((await User.find({ _id: { $in: log.map((l) => l.userId) } }).select("name").lean()).map((u) => [u._id.toString(), u.name]));
   const c = (s: string) => counts.find((x) => x._id === s)?.n ?? 0;

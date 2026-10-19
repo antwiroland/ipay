@@ -20,7 +20,14 @@ export async function setSessionCookie(token: string, expiresAt: Date) {
 }
 
 export async function clearSessionCookie() {
-  (await cookies()).delete(SESSION_COOKIE);
+  // Expire with the same attributes it was set with (required for __Host- cookies).
+  (await cookies()).set(SESSION_COOKIE, "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: 0,
+  });
 }
 
 export async function getSessionToken() {

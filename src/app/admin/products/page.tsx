@@ -2,6 +2,7 @@ import { Plus } from "lucide-react";
 import Link from "next/link";
 import { FilterBar } from "@/components/admin/list-controls";
 import { ProductRowActions } from "@/components/admin/product-row-actions";
+import { StockEditor } from "@/components/admin/stock-editor";
 import { ProductImage } from "@/components/store/product-image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -10,7 +11,7 @@ import { Table, TBody, TD, TH, THead, TR } from "@/components/ui/table";
 import { formatGHS } from "@/lib/money";
 import { isPromoActive } from "@/lib/pricing";
 import { escapeRegex } from "@/lib/validation";
-import { Product } from "@/models";
+import { Order, Product } from "@/models";
 import { requireStaffPage } from "@/server/auth/session";
 import { getSettings } from "@/server/services/settings";
 
@@ -25,7 +26,8 @@ export default async function AdminProducts({ searchParams }: { searchParams: Pr
   if (sp.view === "draft") f.isPublished = false;
   if (sp.view === "low") f.stockQuantity = { $lte: 2 };
   if (sp.q) f.$or = [{ name: new RegExp(escapeRegex(sp.q.slice(0, 60)), "i") }, { slug: new RegExp(escapeRegex(sp.q.slice(0, 60)), "i") }];
-  const [products, settings] = await Promise.all([Product.find(f).sort({ series: -1, installmentPrice: -1 }).lean(), getSettings()]);
+  const [products, settings, ordered] = await Promise.all([Product.find(f).sort({ series: -1, installmentPrice: -1 }).lean(), getSettings(), Order.distinct("productId")]);
+  const hasOrders = new Set(ordered.map(String));
   return (
     <div>
       <PageHeader
@@ -42,7 +44,7 @@ export default async function AdminProducts({ searchParams }: { searchParams: Pr
       />
       <Table className="min-w-[960px]">
         <THead>
-          <tr><TH>Product</TH><TH>Condition</TH><TH className="text-right">Cash</TH><TH className="text-right">Installment</TH><TH className="text-right">Cost</TH><TH className="text-right">Stock</TH><TH>Status</TH><TH /></tr>
+          <tr><TH>Product</TH><TH>Condition</TH><TH className="text-right">Cash</TH><TH className="text-right">Installment</TH><TH className="text-right">Cost</TH><TH className="text-right">Stock (− / set / +)</TH><TH>Status</TH><TH /></tr>
         </THead>
         <TBody>
           {products.length === 0 && <tr><TD colSpan={8} className="py-10 text-center text-muted">No products.</TD></tr>}
@@ -64,7 +66,7 @@ export default async function AdminProducts({ searchParams }: { searchParams: Pr
                 {isPromoActive(p) && <span className="block text-[12px] text-accent">Promo {formatGHS(p.promoInstallmentPrice!)}</span>}
               </TD>
               <TD className="tabular text-right text-muted">{formatGHS(p.costPrice)}</TD>
-              <TD className={`tabular text-right font-medium ${p.stockQuantity === 0 ? "text-danger" : p.stockQuantity <= 2 ? "text-warning" : ""}`}>{p.stockQuantity}</TD>
+              <TD className="text-right"><StockEditor productId={p._id.toString()} name={p.name} stock={p.stockQuantity} /></TD>
               <TD>
                 <div className="flex flex-wrap gap-1">
                   {p.isArchived ? <Badge tone="grey">Archived</Badge> : p.isPublished ? <Badge tone="success">Published</Badge> : <Badge tone="neutral">Draft</Badge>}
@@ -72,7 +74,7 @@ export default async function AdminProducts({ searchParams }: { searchParams: Pr
                   {!p.isAvailable && <Badge tone="warning">Unavailable</Badge>}
                 </div>
               </TD>
-              <TD className="text-right"><ProductRowActions id={p._id.toString()} flags={{ isPublished: p.isPublished, isFeatured: p.isFeatured, isAvailable: p.isAvailable, isArchived: p.isArchived }} /></TD>
+              <TD className="text-right"><ProductRowActions id={p._id.toString()} name={p.name} hasOrders={hasOrders.has(p._id.toString())} flags={{ isPublished: p.isPublished, isFeatured: p.isFeatured, isAvailable: p.isAvailable, isArchived: p.isArchived }} /></TD>
             </TR>
           ))}
         </TBody>

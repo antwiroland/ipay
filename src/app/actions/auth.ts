@@ -1,6 +1,5 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { isStaffRole } from "@/lib/permissions";
 import { safeInternalPath } from "@/lib/validation";
 import { actorOrThrow, appUrl, run } from "@/server/action";
@@ -51,11 +50,12 @@ export async function mfaAction(code: string, next?: string) {
   });
 }
 
+/** Deletes the server-side session and the cookie. The client then reloads (see components/logout-button). */
 export async function logoutAction() {
   const token = await getSessionToken();
   await auth.destroySession(token);
   await clearSessionCookie();
-  redirect("/");
+  return { ok: true as const };
 }
 
 export async function forgotPasswordAction(email: string) {

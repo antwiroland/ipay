@@ -7,7 +7,7 @@ import { OrderStatusBadge, PaymentStatusBadge, SandboxBadge } from "@/components
 import { ProductImage } from "@/components/store/product-image";
 import { Button } from "@/components/ui/button";
 import { Alert, Card, CardContent, CardHeader, CardTitle, EmptyState } from "@/components/ui/primitives";
-import { formatDate, formatDateTime } from "@/lib/dates";
+import { formatDate, formatDateTime, isWithinDays } from "@/lib/dates";
 import { formatGHS } from "@/lib/money";
 import { PURCHASE_MODEL_LABEL } from "@/lib/pricing";
 import { Installment, Notification, Order, Payment, User } from "@/models";
@@ -25,7 +25,7 @@ export default async function AccountDashboard() {
   ]);
   const active = orders.find((o) => o.isActive);
   const completed = orders.filter((o) => o.orderStatus === "completed");
-  const justCompleted = !active && completed[0] && Date.now() - new Date(completed[0].completedAt!).getTime() < 14 * 86400000;
+  const justCompleted = !active && completed[0] && isWithinDays(completed[0].completedAt, 14);
   const installments = active ? await Installment.find({ orderId: active._id }).lean() : [];
   const pendingPayment = recent.some((p) => p.status === "pending" || p.status === "processing");
 
@@ -66,7 +66,7 @@ export default async function AccountDashboard() {
             </div>
           </Card>
           {active.orderStatus === "submitted" || active.orderStatus === "under_review" ? (
-            <Alert tone="info" title="Your application is being reviewed">We'll notify you by SMS and email as soon as it's approved — usually within one business day.</Alert>
+            <Alert tone="info" title="Your application is being reviewed">We&apos;ll notify you by SMS and email as soon as it&apos;s approved — usually within one business day.</Alert>
           ) : (
             <PaymentSummary
               orderId={active._id.toString()}
@@ -94,7 +94,7 @@ export default async function AccountDashboard() {
         />
       )}
 
-      <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <Card>
           <CardHeader className="flex-row items-center justify-between">
             <CardTitle>Recent transactions</CardTitle>
@@ -106,12 +106,12 @@ export default async function AccountDashboard() {
             ) : (
               <ul className="divide-y divide-border">
                 {recent.map((p) => (
-                  <li key={p.reference} className="flex items-center justify-between gap-3 py-3 first:pt-0 last:pb-0">
+                  <li key={p.reference} className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5 py-3 first:pt-0 last:pb-0">
                     <div className="min-w-0">
                       <p className="truncate text-sm font-medium capitalize">{p.kind.replace("_", " ")} · {p.orderNumber}</p>
                       <p className="text-[12.5px] text-muted">{formatDateTime(p.createdAt)}</p>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
                       {p.isTest && <SandboxBadge />}
                       <span className="tabular text-sm font-semibold">{formatGHS(p.amount)}</span>
                       <PaymentStatusBadge status={p.status} />
@@ -129,7 +129,7 @@ export default async function AccountDashboard() {
           </CardHeader>
           <CardContent>
             {notifications.length === 0 ? (
-              <p className="text-sm text-muted">You're all caught up.</p>
+              <p className="text-sm text-muted">You&apos;re all caught up.</p>
             ) : (
               <ul className="space-y-3">
                 {notifications.map((n) => (

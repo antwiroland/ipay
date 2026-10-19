@@ -23,7 +23,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Dialog as D } from "radix-ui";
 import { useState } from "react";
-import { logoutAction } from "@/app/actions/auth";
+import { LogoutButton } from "@/components/logout-button";
 import { Logo } from "@/components/brand";
 import { Button } from "@/components/ui/button";
 import { SheetContent } from "@/components/ui/overlays";
@@ -93,11 +93,9 @@ function Footer({ name, role }: { name: string; role: string }) {
           <p className="truncate text-[13px] font-medium text-white">{name}</p>
           <p className="truncate text-[12px] text-white/50">{role}</p>
         </div>
-        <form action={logoutAction}>
-          <button type="submit" className="rounded-md p-1.5 text-white/60 hover:bg-white/10 hover:text-white" aria-label="Log out">
-            <LogOut className="size-4" />
-          </button>
-        </form>
+        <LogoutButton className="rounded-md p-1.5 text-white/60 hover:bg-white/10 hover:text-white disabled:opacity-50">
+          <LogOut className="size-4" />
+        </LogoutButton>
       </div>
     </div>
   );
@@ -125,7 +123,7 @@ export function AdminSidebar({ items, name, role, sandbox }: { items: AdminNavIt
           </D.Trigger>
           <SheetContent title="Admin menu" side="left" className="bg-foreground">
             <div className="flex h-14 items-center px-5"><Logo light /></div>
-            <div className="flex-1 overflow-y-auto"><NavList items={items} onNavigate={() => setOpen(false)} /></div>
+            <div className="min-h-0 flex-1 overflow-y-auto"><NavList items={items} onNavigate={() => setOpen(false)} /></div>
             <Footer name={name} role={role} />
           </SheetContent>
         </D.Root>

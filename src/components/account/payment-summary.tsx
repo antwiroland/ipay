@@ -27,12 +27,12 @@ export function PaymentSummary({
 }) {
   const pct = progressPercent(paid, total);
   return (
-    <div className="grid gap-4 md:grid-cols-[1.3fr_1fr]">
+    <div className="grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
       <div className="rounded-[20px] bg-foreground p-6 text-white">
-        <div className="flex items-start justify-between">
+        <div className="flex items-start justify-between gap-3">
           <div>
             <p className="text-[13px] text-white/60">Outstanding balance</p>
-            <p className="tabular mt-1 text-[38px] leading-none font-semibold tracking-tight" data-testid="outstanding-balance">{formatGHS(outstanding)}</p>
+            <p className="tabular mt-1 text-[30px] leading-none font-semibold tracking-tight break-all sm:text-[38px]" data-testid="outstanding-balance">{formatGHS(outstanding)}</p>
           </div>
           <p className="tabular rounded-full bg-white/10 px-2.5 py-1 text-sm font-medium" data-testid="progress-percent">{pct}%</p>
         </div>

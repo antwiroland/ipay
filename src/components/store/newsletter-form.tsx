@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/primitives";
 
 export function NewsletterForm() {
   const [state, action, pending] = useActionState(subscribeAction, null);
-  if (state?.ok) return <p className="mt-4 rounded-lg bg-success-soft p-3 text-sm text-success">You're subscribed. Thank you!</p>;
+  if (state?.ok) return <p className="mt-4 rounded-lg bg-success-soft p-3 text-sm text-success">You&apos;re subscribed. Thank you!</p>;
   return (
     <form action={action} className="mt-4 space-y-2">
       <div className="flex gap-2">

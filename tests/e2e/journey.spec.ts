@@ -4,7 +4,7 @@ const uid = Date.now().toString().slice(-7);
 
 async function login(page: Page, email: string, password: string) {
   await page.goto("/login");
-  await page.getByLabel("Email").fill(email);
+  await page.getByLabel("Email", { exact: true }).fill(email);
   await page.getByLabel("Password", { exact: true }).fill(password);
   await page.getByRole("button", { name: "Log in" }).click();
 }
@@ -37,7 +37,7 @@ test("full customer journey: register → apply → pay deposit → pay off → 
 
   await page.goto("/register?next=/products/iphone-13-128gb-uk-used%23plans");
   await page.getByLabel("Full name").fill("E2E Tester");
-  await page.getByLabel("Email").fill(`e2e${uid}@example.com`);
+  await page.getByLabel("Email", { exact: true }).fill(`e2e${uid}@example.com`);
   await page.getByLabel("Phone number").fill(`0249${uid.slice(0, 6)}`);
   await page.getByLabel("Password", { exact: true }).fill("E2ePassword123");
   await page.getByLabel("Confirm password").fill("E2ePassword123");

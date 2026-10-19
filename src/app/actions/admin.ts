@@ -107,10 +107,19 @@ export async function productFlagsAction(productId: string, flags: Partial<{ isP
 export async function stockAction(productId: string, input: unknown) {
   return run(async () => {
     const actor = await actorOrThrow();
-    const p = await products.adjustStock(actor, String(productId), input);
+    const { product } = await products.updateStock(actor, String(productId), input);
     refreshAll();
-    return { stock: p.stockQuantity };
+    return { stock: product.stockQuantity };
   }, "Stock updated.");
+}
+
+export async function deleteProductAction(productId: string) {
+  return run(async () => {
+    const actor = await actorOrThrow();
+    const r = await products.deleteProduct(actor, String(productId));
+    refreshAll();
+    return r;
+  }, "Product deleted.");
 }
 
 /* ---------------- Plans ---------------- */

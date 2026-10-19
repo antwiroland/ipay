@@ -115,7 +115,7 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
         </AnimatePresence>
         {slide.productImage && (
           <div className="relative hidden h-[380px] md:block">
-            <Image src={slide.productImage} alt="" fill unoptimized className="object-contain drop-shadow-[0_30px_40px_rgba(0,0,0,0.35)]" priority />
+            <Image src={slide.productImage} alt="" fill unoptimized className="object-contain drop-shadow-[0_30px_40px_rgba(0,0,0,0.35)]" loading="eager" />
           </div>
         )}
       </div>

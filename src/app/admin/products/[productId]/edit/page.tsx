@@ -2,12 +2,14 @@ import { ExternalLink } from "lucide-react";
 import { Types } from "mongoose";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { DeleteProductButton } from "@/components/admin/delete-product";
 import { ProductForm } from "@/components/admin/product-form";
+import { StockEditor } from "@/components/admin/stock-editor";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, PageHeader } from "@/components/ui/primitives";
 import { formatDateTime } from "@/lib/dates";
 import { serialize } from "@/lib/utils";
-import { InventoryMovement, Product } from "@/models";
+import { InventoryMovement, Order, Product } from "@/models";
 import { requireStaffPage } from "@/server/auth/session";
 import { planOptions, toFormValues } from "../../_form-data";
 
@@ -17,19 +19,29 @@ export default async function EditProductPage({ params }: { params: Promise<{ pr
   const { productId } = await params;
   await requireStaffPage("products.manage", `/admin/products/${productId}/edit`);
   if (!Types.ObjectId.isValid(productId)) notFound();
-  const [product, movements, plans] = await Promise.all([
+  const [product, movements, plans, orderCount] = await Promise.all([
     Product.findById(productId).lean(),
     InventoryMovement.find({ productId }).sort({ createdAt: -1 }).limit(20).populate("actorId", "name").lean(),
     planOptions(),
+    Order.countDocuments({ productId }),
   ]);
   if (!product) notFound();
   return (
     <div className="space-y-6">
       <PageHeader
         title={product.name}
-        description={`${product.stockQuantity} in stock`}
-        actions={product.isPublished ? <Button variant="outline" asChild><Link href={`/products/${product.slug}`} target="_blank"><ExternalLink /> View on store</Link></Button> : undefined}
+        description={`${orderCount} order${orderCount === 1 ? "" : "s"} · ${product.isArchived ? "archived" : product.isPublished ? "published" : "draft"}`}
+        actions={
+          <>
+            {product.isPublished && <Button variant="outline" asChild><Link href={`/products/${product.slug}`} target="_blank"><ExternalLink /> View on store</Link></Button>}
+            <DeleteProductButton id={productId} name={product.name} hasOrders={orderCount > 0} />
+          </>
+        }
       />
+      <Card>
+        <CardHeader><CardTitle>Stock</CardTitle></CardHeader>
+        <CardContent><StockEditor productId={productId} name={product.name} stock={product.stockQuantity} variant="card" /></CardContent>
+      </Card>
       <ProductForm productId={productId} initial={serialize(toFormValues(product))} plans={plans} />
       <Card>
         <CardHeader><CardTitle>Inventory movements</CardTitle></CardHeader>
