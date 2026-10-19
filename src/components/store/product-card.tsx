@@ -63,14 +63,15 @@ export function ProductCard({ p, priority }: { p: CatalogCard; priority?: boolea
           </div>
         )}
 
-        <div className="relative z-10 mt-auto grid grid-cols-2 gap-2 pt-5">
-          <Button variant="outline" size="sm" asChild>
-            <Link href={`/products/${p.slug}`}>View details</Link>
-          </Button>
-          <Button size="sm" asChild disabled={!p.inStock}>
+        {/* Stacked so the labels never overflow in narrow 3–4 column grids. */}
+        <div className="relative z-10 mt-auto flex flex-col gap-2 pt-5">
+          <Button asChild disabled={!p.inStock} className="w-full">
             <Link href={`/products/${p.slug}#plans`} aria-disabled={!p.inStock}>
-              {p.inStock ? "Buy on installments" : "Notify me"} <ArrowRight className="hidden sm:block" />
+              {p.inStock ? "Buy on installments" : "Out of stock — view details"} <ArrowRight />
             </Link>
+          </Button>
+          <Button variant="ghost" size="sm" asChild className="w-full text-muted hover:text-foreground">
+            <Link href={`/products/${p.slug}`}>View details</Link>
           </Button>
         </div>
       </div>

@@ -28,8 +28,9 @@ export async function makeUser(role: Role = "customer", overrides: Partial<model
   const now = new Date();
   const u = await User.create({
     name: `Test ${role} ${seq}`,
-    email: `user${seq}_${Math.random().toString(36).slice(2, 6)}@example.com`,
-    phone: `+23324${String(1000000 + seq * 7 + Math.floor(Math.random() * 1000)).slice(-7)}`,
+    // Deterministic per file (each test file has its own database), so unique indexes never collide.
+    email: `user${seq}@example.com`,
+    phone: `+23324${String(1000000 + seq).slice(-7)}`,
     passwordHash: await hashPassword("Password123"),
     role,
     verificationStatus: "verified",
