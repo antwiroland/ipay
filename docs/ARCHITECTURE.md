@@ -187,4 +187,4 @@ expire stale pending payments, refresh installment/repayment statuses, send due-
    least submitted to apply and `verified` before approval.
 6. Identity verification is a staff-reviewed workflow; the system stores only the ID type, last 4 characters and a keyed
    hash of the ID number. It does **not** claim automated Ghana Card verification.
-7. Seed product imagery is generated vector renders; real product photography should be uploaded via admin.
+7. Seed product imagery is Apple studio photography (public/images/devices/*.webp, one per colour); the vector placeholder is used when a product has no images. Replace or add photos via admin.

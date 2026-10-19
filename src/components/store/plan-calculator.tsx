@@ -14,6 +14,7 @@ import { formatGHS } from "@/lib/money";
 import { frequencyLabel, PURCHASE_MODEL_LABEL, quote, scheduleDueDates, type PricingPlan, type PricingProduct } from "@/lib/pricing";
 import { formatDate } from "@/lib/dates";
 import { cn } from "@/lib/utils";
+import { useProductColour } from "./product-colour";
 
 export interface CalcPlan extends PricingPlan {
   id: string;
@@ -55,7 +56,7 @@ export function PlanCalculator({
 }) {
   const router = useRouter();
   const [planId, setPlanId] = useState(plans[0]?.id ?? "");
-  const [colour, setColour] = useState(colours[0]?.name ?? "");
+  const [colour, setColour] = useProductColour(colours[0]?.name ?? "");
   const [addOns, setAddOns] = useState<string[]>([]);
   const [agree, setAgree] = useState(false);
   const [open, setOpen] = useState(false);

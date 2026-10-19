@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-/** Optimised product imagery. Vector renders are served as-is; raster uploads go through next/image. */
+/** Optimised product imagery. Vector art is served as-is; photos go through next/image. */
 export function ProductImage({
   src,
   alt,

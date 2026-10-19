@@ -1,9 +1,9 @@
 import { ArrowRight, BadgeCheck, CalendarClock, ChevronDown, Headphones, LineChart, LockKeyhole, ShieldCheck, Smartphone, Wallet } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { HeroCarousel, type HeroSlide } from "@/components/store/hero-carousel";
 import { FAQS } from "@/components/store/faq-data";
 import { ProductCard } from "@/components/store/product-card";
+import { ProductImage } from "@/components/store/product-image";
 import { Button } from "@/components/ui/button";
 import { formatGHS } from "@/lib/money";
 import { Review } from "@/models";
@@ -101,7 +101,7 @@ export default async function HomePage() {
 
           <div className="relative mx-auto w-full max-w-[560px]">
             <div className="relative aspect-[16/15]">
-              <Image src={heroDevice?.image ?? "/images/devices/placeholder.svg"} alt={heroDevice?.imageAlt ?? "iPhone"} fill loading="eager" fetchPriority="high" unoptimized className="object-contain" />
+              <ProductImage src={heroDevice?.image ?? ""} alt={heroDevice?.imageAlt ?? "iPhone"} priority sizes="(min-width: 1024px) 560px, 90vw" className="drop-shadow-[0_30px_40px_rgb(11_18_32/0.18)]" />
             </div>
             {heroDevice && (
               <div className="absolute bottom-6 left-0 w-60 animate-fade-up rounded-[16px] border border-border bg-surface/95 p-4 shadow-[var(--shadow-lift)] backdrop-blur [animation-delay:200ms] sm:-left-6">

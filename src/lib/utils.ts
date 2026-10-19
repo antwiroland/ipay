@@ -18,3 +18,9 @@ export function initials(name: string) {
 export function serialize<T>(value: T): T {
   return JSON.parse(JSON.stringify(value));
 }
+
+/** Pick the product image for a colour (seeded and admin images use "<model> in <colour>" alt text). */
+export function imageForColour<T extends { alt?: string }>(images: T[], colour: string): T | undefined {
+  const suffix = ` in ${colour}`.toLowerCase();
+  return (colour && images.find((i) => i.alt?.toLowerCase().endsWith(suffix))) || images[0];
+}

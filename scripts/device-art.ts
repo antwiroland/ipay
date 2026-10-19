@@ -1,6 +1,6 @@
 /**
- * Generates vector product renders for seed data (public/images/devices/*.svg).
- * These are stylised illustrations, not Apple photography — upload real product photos via the admin.
+ * Generates the vector placeholder device and promotion banners for seed data.
+ * Product photos themselves are static files in public/images/devices/*.webp.
  */
 export type CameraStyle = "dual-diagonal" | "dual-vertical" | "pro-triple" | "plateau-pro" | "plateau-air";
 

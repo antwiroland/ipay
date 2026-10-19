@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PlanCalculator, type CalcPlan, type Viewer } from "@/components/store/plan-calculator";
+import { ProductColourProvider } from "@/components/store/product-colour";
 import { ProductGallery } from "@/components/store/product-gallery";
 import { Badge } from "@/components/ui/badge";
 import { formatGHS } from "@/lib/money";
@@ -91,58 +92,60 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <span className="text-foreground">{product.name}</span>
       </nav>
 
-      <div className="grid gap-10 lg:grid-cols-[1.05fr_1fr]">
-        <ProductGallery images={product.images.map((i) => ({ url: i.url, alt: i.alt }))} name={product.name} />
+      <ProductColourProvider initial={product.colourOptions[0]?.name ?? ""}>
+        <div className="grid gap-10 lg:grid-cols-[1.05fr_1fr]">
+          <ProductGallery images={product.images.map((i) => ({ url: i.url, alt: i.alt }))} name={product.name} />
 
-        <div className="flex flex-col gap-6">
-          <div>
-            <div className="flex flex-wrap gap-2">
-              <Badge tone={product.condition === "brand_new" ? "dark" : "neutral"}>{product.condition === "brand_new" ? "Brand new" : "UK used"}</Badge>
-              <Badge tone={inStock ? "success" : "grey"} dot>{inStock ? (product.stockQuantity <= 3 ? `Only ${product.stockQuantity} left` : "In stock") : "Out of stock"}</Badge>
-            </div>
-            <h1 className="mt-3 text-[32px] leading-tight font-semibold tracking-tight sm:text-[40px]">{product.name}</h1>
-            <p className="mt-3 text-[15.5px] leading-relaxed text-muted">{product.description}</p>
-            <div className="mt-5 flex flex-wrap items-end gap-x-8 gap-y-3">
-              <div>
-                <p className="text-[12.5px] text-muted">Installment price from</p>
-                <p className="tabular text-2xl font-semibold">{formatGHS(Math.min(...[product.installmentPrice, product.promoInstallmentPrice ?? Infinity].filter(Number.isFinite)))}</p>
+          <div className="flex flex-col gap-6">
+            <div>
+              <div className="flex flex-wrap gap-2">
+                <Badge tone={product.condition === "brand_new" ? "dark" : "neutral"}>{product.condition === "brand_new" ? "Brand new" : "UK used"}</Badge>
+                <Badge tone={inStock ? "success" : "grey"} dot>{inStock ? (product.stockQuantity <= 3 ? `Only ${product.stockQuantity} left` : "In stock") : "Out of stock"}</Badge>
               </div>
-              <div>
-                <p className="text-[12.5px] text-muted">Cash price</p>
-                <p className="tabular text-lg font-medium text-muted">{formatGHS(effectiveCashPrice(product))}</p>
+              <h1 className="mt-3 text-[32px] leading-tight font-semibold tracking-tight sm:text-[40px]">{product.name}</h1>
+              <p className="mt-3 text-[15.5px] leading-relaxed text-muted">{product.description}</p>
+              <div className="mt-5 flex flex-wrap items-end gap-x-8 gap-y-3">
+                <div>
+                  <p className="text-[12.5px] text-muted">Installment price from</p>
+                  <p className="tabular text-2xl font-semibold">{formatGHS(Math.min(...[product.installmentPrice, product.promoInstallmentPrice ?? Infinity].filter(Number.isFinite)))}</p>
+                </div>
+                <div>
+                  <p className="text-[12.5px] text-muted">Cash price</p>
+                  <p className="tabular text-lg font-medium text-muted">{formatGHS(effectiveCashPrice(product))}</p>
+                </div>
               </div>
             </div>
+
+            <PlanCalculator
+              product={pricing}
+              productId={product._id.toString()}
+              slug={product.slug}
+              plans={calcPlans}
+              colours={product.colourOptions.map((c) => ({ name: c.name, hex: c.hex }))}
+              campaign={campaign ? { discountBps: campaign.discountBps, title: campaign.title } : null}
+              inStock={inStock}
+              viewer={viewer}
+            />
+
+            <ul className="grid gap-3 sm:grid-cols-2">
+              {[
+                [<ShieldCheck key="a" />, "Inspected & tested", product.condition === "brand_new" ? "Sealed, brand new device" : "Graded by our technicians"],
+                [<PackageCheck key="b" />, "Collect in store", "Accra store or partner location"],
+                [<Truck key="c" />, "Delivery available", "Selected areas, on request"],
+                [<RotateCcw key="d" />, "7-day support", "Help with setup and data transfer"],
+              ].map(([icon, t, d]) => (
+                <li key={String(t)} className="flex gap-3 rounded-[14px] border border-border bg-surface p-3.5">
+                  <span className="text-accent [&_svg]:size-5">{icon}</span>
+                  <span>
+                    <span className="block text-sm font-medium">{t}</span>
+                    <span className="block text-[12.5px] text-muted">{d}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
-
-          <PlanCalculator
-            product={pricing}
-            productId={product._id.toString()}
-            slug={product.slug}
-            plans={calcPlans}
-            colours={product.colourOptions.map((c) => ({ name: c.name, hex: c.hex }))}
-            campaign={campaign ? { discountBps: campaign.discountBps, title: campaign.title } : null}
-            inStock={inStock}
-            viewer={viewer}
-          />
-
-          <ul className="grid gap-3 sm:grid-cols-2">
-            {[
-              [<ShieldCheck key="a" />, "Inspected & tested", product.condition === "brand_new" ? "Sealed, brand new device" : "Graded by our technicians"],
-              [<PackageCheck key="b" />, "Collect in store", "Accra store or partner location"],
-              [<Truck key="c" />, "Delivery available", "Selected areas, on request"],
-              [<RotateCcw key="d" />, "7-day support", "Help with setup and data transfer"],
-            ].map(([icon, t, d]) => (
-              <li key={String(t)} className="flex gap-3 rounded-[14px] border border-border bg-surface p-3.5">
-                <span className="text-accent [&_svg]:size-5">{icon}</span>
-                <span>
-                  <span className="block text-sm font-medium">{t}</span>
-                  <span className="block text-[12.5px] text-muted">{d}</span>
-                </span>
-              </li>
-            ))}
-          </ul>
         </div>
-      </div>
+      </ProductColourProvider>
 
       <section className="mt-16 grid gap-10 lg:grid-cols-2">
         <div>

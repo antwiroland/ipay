@@ -6,15 +6,16 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import mongoose from "mongoose";
+import { imageForColour } from "@/lib/utils";
 import * as models from "@/models";
-import { PaymentPlan, Product, Promotion, Setting, User } from "@/models";
+import { Order, PaymentPlan, Product, Promotion, Setting, User } from "@/models";
 import { hashPassword } from "@/server/auth/crypto";
 import { connectDB } from "@/server/db";
 import { setMockOutcome } from "@/server/payments/mock";
 import { TERMS_VERSION, toActor } from "@/server/services/auth";
 import { createOrder, updateFulfilment } from "@/server/services/orders";
 import { confirmPayment, initiatePayment } from "@/server/services/payments";
-import { bannerSvg, deviceSvg, type CameraStyle } from "./device-art";
+import { bannerSvg, deviceSvg } from "./device-art";
 
 const APP_URL = process.env.APP_URL || "http://localhost:3000";
 // Demo payments are always created with the sandbox provider (stored isTest=true, labelled "Dev sandbox"),
@@ -46,33 +47,34 @@ const PLANS = [
 
 type Spec = {
   model: string; series: number; storage: string; condition: "brand_new" | "uk_used"; cash: number; inst: number; cost: number;
-  stock: number; featured?: boolean; camera: CameraStyle; colours: [string, string][]; specs: [string, string][]; daysAgo: number;
+  stock: number; featured?: boolean; colours: [string, string][]; specs: [string, string][]; daysAgo: number;
   promo?: number; desc: string;
 };
 
 const PRODUCTS: Spec[] = [
-  { model: "iPhone 17 Pro Max", series: 17, storage: "256GB", condition: "brand_new", cash: 23500, inst: 26800, cost: 20900, stock: 6, featured: true, camera: "plateau-pro", colours: [["Cosmic Orange", "#e0763a"], ["Deep Blue", "#2c3e63"], ["Silver", "#d9dadc"]], specs: [["Display", "6.9″ Super Retina XDR, ProMotion 120Hz"], ["Chip", "A19 Pro"], ["Camera", "48MP Pro Fusion triple camera"], ["Battery", "Up to 37 hours video playback"], ["Build", "Aluminium unibody, Ceramic Shield 2"]], daysAgo: 20, desc: "The biggest, longest-lasting iPhone yet, with a pro camera system built for creators." },
-  { model: "iPhone 17 Pro", series: 17, storage: "256GB", condition: "brand_new", cash: 20500, inst: 23400, cost: 18200, stock: 8, featured: true, camera: "plateau-pro", colours: [["Deep Blue", "#2c3e63"], ["Cosmic Orange", "#e0763a"], ["Silver", "#d9dadc"]], specs: [["Display", "6.3″ Super Retina XDR, ProMotion 120Hz"], ["Chip", "A19 Pro"], ["Camera", "48MP Pro Fusion triple camera"], ["Build", "Aluminium unibody"]], daysAgo: 22, desc: "Pro performance and cameras in a size that fits comfortably in one hand." },
-  { model: "iPhone Air", series: 17, storage: "256GB", condition: "brand_new", cash: 18200, inst: 20900, cost: 16100, stock: 4, camera: "plateau-air", colours: [["Sky Blue", "#b9d3ea"], ["Space Black", "#26272b"], ["Cloud White", "#ecebe6"]], specs: [["Display", "6.5″ ProMotion"], ["Chip", "A19 Pro"], ["Camera", "48MP Fusion"], ["Thickness", "5.6 mm"]], daysAgo: 25, desc: "Remarkably thin and light, without compromising on power." },
-  { model: "iPhone 17", series: 17, storage: "256GB", condition: "brand_new", cash: 14800, inst: 17000, cost: 13000, stock: 10, featured: true, camera: "dual-vertical", colours: [["Lavender", "#c9bfe3"], ["Sage", "#b7c4a8"], ["Mist Blue", "#a9bfd6"], ["Black", "#23252a"]], specs: [["Display", "6.3″ ProMotion 120Hz"], ["Chip", "A19"], ["Camera", "48MP Dual Fusion"], ["Storage", "256GB"]], daysAgo: 24, desc: "A brilliant all-rounder with a smooth 120Hz display and all-day battery." },
-  { model: "iPhone 16 Pro", series: 16, storage: "128GB", condition: "uk_used", cash: 13200, inst: 15200, cost: 11400, stock: 5, camera: "pro-triple", colours: [["Desert Titanium", "#bfa48a"], ["Natural Titanium", "#b9b4ab"], ["Black Titanium", "#3a3a3c"]], specs: [["Display", "6.3″ ProMotion"], ["Chip", "A18 Pro"], ["Camera", "48MP triple, 5× telephoto"], ["Grade", "UK used · Grade A, battery health ≥ 90%"]], daysAgo: 60, promo: 14400, desc: "Carefully inspected UK-used iPhone 16 Pro in excellent condition." },
-  { model: "iPhone 16", series: 16, storage: "128GB", condition: "brand_new", cash: 11900, inst: 13700, cost: 10300, stock: 7, camera: "dual-vertical", colours: [["Ultramarine", "#5b6fd6"], ["Teal", "#7fbcb5"], ["Pink", "#efb8cf"], ["White", "#f0efea"]], specs: [["Display", "6.1″ Super Retina XDR"], ["Chip", "A18"], ["Camera", "48MP Fusion + Ultra Wide"], ["Action", "Camera Control"]], daysAgo: 90, desc: "Bold colours, Camera Control and the A18 chip." },
-  { model: "iPhone 15 Pro Max", series: 15, storage: "256GB", condition: "uk_used", cash: 12400, inst: 14300, cost: 10800, stock: 3, camera: "pro-triple", colours: [["Blue Titanium", "#3f4a5c"], ["Natural Titanium", "#b9b4ab"]], specs: [["Display", "6.7″ ProMotion"], ["Chip", "A17 Pro"], ["Camera", "48MP triple, 5× telephoto"], ["Grade", "UK used · Grade A"]], daysAgo: 120, desc: "Titanium design and 5× zoom — a pro favourite at a friendlier price." },
-  { model: "iPhone 15", series: 15, storage: "128GB", condition: "brand_new", cash: 9800, inst: 11300, cost: 8500, stock: 6, camera: "dual-diagonal", colours: [["Blue", "#c9d6e3"], ["Green", "#cfe0cd"], ["Black", "#2b2d31"]], specs: [["Display", "6.1″ Super Retina XDR"], ["Chip", "A16 Bionic"], ["Camera", "48MP Main"], ["Port", "USB-C"]], daysAgo: 150, desc: "Dynamic Island, a 48MP camera and USB-C." },
-  { model: "iPhone 14 Pro", series: 14, storage: "128GB", condition: "uk_used", cash: 8200, inst: 9500, cost: 7000, stock: 4, camera: "pro-triple", colours: [["Deep Purple", "#4b3f5c"], ["Space Black", "#2f2f33"]], specs: [["Display", "6.1″ ProMotion"], ["Chip", "A16 Bionic"], ["Camera", "48MP triple"], ["Grade", "UK used · Grade A"]], daysAgo: 200, desc: "Always-On display and pro cameras, fully tested." },
-  { model: "iPhone 13", series: 13, storage: "128GB", condition: "uk_used", cash: 5500, inst: 6600, cost: 4500, stock: 9, featured: true, camera: "dual-diagonal", colours: [["Midnight", "#1f2430"], ["Starlight", "#f1ebe1"], ["Blue", "#3d5a80"]], specs: [["Display", "6.1″ Super Retina XDR"], ["Chip", "A15 Bionic"], ["Camera", "12MP dual"], ["Grade", "UK used · Grade A, battery health ≥ 88%"]], daysAgo: 260, desc: "Our most popular plan device: dependable, fast and great value." },
-  { model: "iPhone 12", series: 12, storage: "64GB", condition: "uk_used", cash: 3900, inst: 4700, cost: 3200, stock: 0, camera: "dual-vertical", colours: [["Black", "#24262b"], ["White", "#f2f1ed"]], specs: [["Display", "6.1″ Super Retina XDR"], ["Chip", "A14 Bionic"], ["Camera", "12MP dual"], ["Grade", "UK used · Grade B"]], daysAgo: 300, desc: "An affordable way into iPhone. Restocking soon." },
+  { model: "iPhone 17 Pro Max", series: 17, storage: "256GB", condition: "brand_new", cash: 23500, inst: 26800, cost: 20900, stock: 6, featured: true, colours: [["Cosmic Orange", "#e0763a"], ["Deep Blue", "#2c3e63"], ["Silver", "#d9dadc"]], specs: [["Display", "6.9″ Super Retina XDR, ProMotion 120Hz"], ["Chip", "A19 Pro"], ["Camera", "48MP Pro Fusion triple camera"], ["Battery", "Up to 37 hours video playback"], ["Build", "Aluminium unibody, Ceramic Shield 2"]], daysAgo: 20, desc: "The biggest, longest-lasting iPhone yet, with a pro camera system built for creators." },
+  { model: "iPhone 17 Pro", series: 17, storage: "256GB", condition: "brand_new", cash: 20500, inst: 23400, cost: 18200, stock: 8, featured: true, colours: [["Deep Blue", "#2c3e63"], ["Cosmic Orange", "#e0763a"], ["Silver", "#d9dadc"]], specs: [["Display", "6.3″ Super Retina XDR, ProMotion 120Hz"], ["Chip", "A19 Pro"], ["Camera", "48MP Pro Fusion triple camera"], ["Build", "Aluminium unibody"]], daysAgo: 22, desc: "Pro performance and cameras in a size that fits comfortably in one hand." },
+  { model: "iPhone Air", series: 17, storage: "256GB", condition: "brand_new", cash: 18200, inst: 20900, cost: 16100, stock: 4, colours: [["Sky Blue", "#b9d3ea"], ["Space Black", "#26272b"], ["Cloud White", "#ecebe6"]], specs: [["Display", "6.5″ ProMotion"], ["Chip", "A19 Pro"], ["Camera", "48MP Fusion"], ["Thickness", "5.6 mm"]], daysAgo: 25, desc: "Remarkably thin and light, without compromising on power." },
+  { model: "iPhone 17", series: 17, storage: "256GB", condition: "brand_new", cash: 14800, inst: 17000, cost: 13000, stock: 10, featured: true, colours: [["Lavender", "#c9bfe3"], ["Sage", "#b7c4a8"], ["Mist Blue", "#a9bfd6"], ["Black", "#23252a"]], specs: [["Display", "6.3″ ProMotion 120Hz"], ["Chip", "A19"], ["Camera", "48MP Dual Fusion"], ["Storage", "256GB"]], daysAgo: 24, desc: "A brilliant all-rounder with a smooth 120Hz display and all-day battery." },
+  { model: "iPhone 16 Pro", series: 16, storage: "128GB", condition: "uk_used", cash: 13200, inst: 15200, cost: 11400, stock: 5, colours: [["Desert Titanium", "#bfa48a"], ["Natural Titanium", "#b9b4ab"], ["Black Titanium", "#3a3a3c"]], specs: [["Display", "6.3″ ProMotion"], ["Chip", "A18 Pro"], ["Camera", "48MP triple, 5× telephoto"], ["Grade", "UK used · Grade A, battery health ≥ 90%"]], daysAgo: 60, promo: 14400, desc: "Carefully inspected UK-used iPhone 16 Pro in excellent condition." },
+  { model: "iPhone 16", series: 16, storage: "128GB", condition: "brand_new", cash: 11900, inst: 13700, cost: 10300, stock: 7, colours: [["Ultramarine", "#5b6fd6"], ["Teal", "#7fbcb5"], ["Pink", "#efb8cf"], ["White", "#f0efea"]], specs: [["Display", "6.1″ Super Retina XDR"], ["Chip", "A18"], ["Camera", "48MP Fusion + Ultra Wide"], ["Action", "Camera Control"]], daysAgo: 90, desc: "Bold colours, Camera Control and the A18 chip." },
+  { model: "iPhone 15 Pro Max", series: 15, storage: "256GB", condition: "uk_used", cash: 12400, inst: 14300, cost: 10800, stock: 3, colours: [["Blue Titanium", "#3f4a5c"], ["Natural Titanium", "#b9b4ab"]], specs: [["Display", "6.7″ ProMotion"], ["Chip", "A17 Pro"], ["Camera", "48MP triple, 5× telephoto"], ["Grade", "UK used · Grade A"]], daysAgo: 120, desc: "Titanium design and 5× zoom — a pro favourite at a friendlier price." },
+  { model: "iPhone 15", series: 15, storage: "128GB", condition: "brand_new", cash: 9800, inst: 11300, cost: 8500, stock: 6, colours: [["Blue", "#c9d6e3"], ["Green", "#cfe0cd"], ["Black", "#2b2d31"]], specs: [["Display", "6.1″ Super Retina XDR"], ["Chip", "A16 Bionic"], ["Camera", "48MP Main"], ["Port", "USB-C"]], daysAgo: 150, desc: "Dynamic Island, a 48MP camera and USB-C." },
+  { model: "iPhone 14 Pro", series: 14, storage: "128GB", condition: "uk_used", cash: 8200, inst: 9500, cost: 7000, stock: 4, colours: [["Deep Purple", "#4b3f5c"], ["Space Black", "#2f2f33"]], specs: [["Display", "6.1″ ProMotion"], ["Chip", "A16 Bionic"], ["Camera", "48MP triple"], ["Grade", "UK used · Grade A"]], daysAgo: 200, desc: "Always-On display and pro cameras, fully tested." },
+  { model: "iPhone 13", series: 13, storage: "128GB", condition: "uk_used", cash: 5500, inst: 6600, cost: 4500, stock: 9, featured: true, colours: [["Midnight", "#1f2430"], ["Starlight", "#f1ebe1"], ["Blue", "#3d5a80"]], specs: [["Display", "6.1″ Super Retina XDR"], ["Chip", "A15 Bionic"], ["Camera", "12MP dual"], ["Grade", "UK used · Grade A, battery health ≥ 88%"]], daysAgo: 260, desc: "Our most popular plan device: dependable, fast and great value." },
+  { model: "iPhone 12", series: 12, storage: "64GB", condition: "uk_used", cash: 3900, inst: 4700, cost: 3200, stock: 0, colours: [["Black", "#24262b"], ["White", "#f2f1ed"]], specs: [["Display", "6.1″ Super Retina XDR"], ["Chip", "A14 Bionic"], ["Camera", "12MP dual"], ["Grade", "UK used · Grade B"]], daysAgo: 300, desc: "An affordable way into iPhone. Restocking soon." },
 ];
+
+const LEGACY_RENDER = /^\/images\/devices\/(?!placeholder).+\.svg$/;
+
+/** Studio photos live in public/images/devices as <model>-<colour>.webp. */
+function productPhotos(p: Spec) {
+  return p.colours.map(([name]) => ({ url: `/images/devices/${slugify(p.model)}-${slugify(name)}.webp`, alt: `${p.model} in ${name}` }));
+}
 
 async function writeArt() {
   mkdirSync(path.join(PUBLIC, "devices"), { recursive: true });
   mkdirSync(path.join(PUBLIC, "banners"), { recursive: true });
-  for (const p of PRODUCTS) {
-    for (const [name, hex] of p.colours) {
-      const file = `${slugify(p.model)}-${slugify(name)}.svg`;
-      writeFileSync(path.join(PUBLIC, "devices", file), deviceSvg({ colour: hex, camera: p.camera, label: `${p.model} in ${name}`, id: slugify(name).slice(0, 6) }));
-    }
-  }
   writeFileSync(path.join(PUBLIC, "devices", "placeholder.svg"), deviceSvg({ colour: "#c8ccd4", camera: "dual-vertical", label: "iPhone", id: "ph" }));
   writeFileSync(path.join(PUBLIC, "banners", "launch-desktop.svg"), bannerSvg({ title: "iPhone 17 launch", colourA: "#3b5bff", colourB: "#8b5cf6" }));
   writeFileSync(path.join(PUBLIC, "banners", "launch-mobile.svg"), bannerSvg({ title: "iPhone 17 launch", colourA: "#3b5bff", colourB: "#8b5cf6", mobile: true }));
@@ -109,7 +111,7 @@ async function main() {
     if (typeof m === "function" && "init" in m && "modelName" in m) await (m as unknown as mongoose.Model<unknown>).init();
   }
   await writeArt();
-  console.log("✔ device renders written to public/images");
+  console.log("✔ placeholder and banner art written to public/images");
 
   await Setting.updateOne({ _id: "global" }, { $setOnInsert: { _id: "global" } }, { upsert: true });
 
@@ -141,7 +143,7 @@ async function main() {
           storageGb: parseInt(p.storage, 10),
           colourOptions: p.colours.map(([name, hex]) => ({ name, hex })),
           condition: p.condition,
-          images: p.colours.map(([name]) => ({ url: `/images/devices/${slugify(p.model)}-${slugify(name)}.svg`, alt: `${p.model} in ${name}` })),
+          images: productPhotos(p),
           specs: p.specs.map(([label, value]) => ({ label, value })),
           cashPrice: cedi(p.cash),
           installmentPrice: cedi(p.inst),
@@ -164,6 +166,13 @@ async function main() {
       },
       { upsert: true, timestamps: false },
     );
+    // Databases seeded before the product photos existed still point at the old vector renders.
+    await Product.updateOne({ slug, "images.url": LEGACY_RENDER }, { $set: { images: productPhotos(p) } });
+  }
+  for (const o of await Order.find({ "productSnapshot.image": LEGACY_RENDER }).select("productId productSnapshot.colour").lean()) {
+    const product = await Product.findById(o.productId).select("images").lean();
+    const image = imageForColour(product?.images ?? [], o.productSnapshot.colour)?.url;
+    if (image) await Order.updateOne({ _id: o._id }, { $set: { "productSnapshot.image": image } });
   }
   console.log(`✔ ${PRODUCTS.length} products`);
 

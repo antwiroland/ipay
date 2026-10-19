@@ -1,6 +1,7 @@
 import { Types } from "mongoose";
 import { z } from "zod";
 import { formatGHS } from "@/lib/money";
+import { imageForColour } from "@/lib/utils";
 import { canTransition, isHandedOver, type FulfilmentStatus, type OrderStatus } from "@/lib/order-status";
 import { PricingError, quote } from "@/lib/pricing";
 import { objectIdSchema } from "@/lib/validation";
@@ -133,7 +134,7 @@ export async function createOrder(actor: Actor, input: unknown) {
               storage: product.storage,
               colour,
               condition: product.condition,
-              image: product.images?.[0]?.url ?? "",
+              image: imageForColour(product.images ?? [], colour)?.url ?? "",
               cashPrice: q.cashPrice,
               listInstallmentPrice: product.installmentPrice,
             },
