@@ -82,7 +82,7 @@
 - [x] Test duplicate webhook handling
 - [x] Test installment calculations
 - [x] Test refunds and reversals
-- [ ] Test responsive layouts (Playwright specs written; browsers not installed here, so not yet run)
+- [x] Test responsive layouts (60 page views scanned at 360px in real Chrome; e2e suite itself not yet run)
 - [x] Fix critical defects
 
 ### Phase 9: Deployment
@@ -106,7 +106,9 @@
 | 2026-10-19 | `npx eslint src tests scripts` | 11 problems (unescaped quotes, `Date.now` in render, unused var) → fixed → **0** |
 | 2026-10-19 | `npm run seed` (Atlas) | OK — 11 products, 4 plans, 4 orders, 9 sandbox payments, 48 installments. Ama's order = GH₵6,600 / paid GH₵3,960 / outstanding GH₵2,640 / 60 % (spec example); ledger reconciles |
 | 2026-10-19 | `next dev` + HTTP smoke test | 15 public routes 200; signed-out `/account` `/admin` → 307 login; 10 customer pages 200; 23 admin pages + CSV export 200 as Super Admin; Sales Officer denied payments/staff/export (307 / 403); customer bounced from `/admin`; **0 server errors** |
-| — | `npm run test:e2e` | **Not run** — Playwright browsers not installed on this machine |
+| 2026-10-19 | `npx vitest run` (after stock/delete/logout work) | **69/69** (8 new tests in `tests/integration/inventory.test.ts`) |
+| 2026-10-19 | Real-browser checks (Playwright driving installed Chrome against the dev server + Atlas) | Stock +3 then set back (data unchanged); logout via admin sidebar, header menu, customer mobile menu and admin mobile menu all end the session; 60 page views at 360px width — none wider than the screen; 25 pages with zero console errors/warnings |
+| — | `npm run test:e2e` | **Not run** — the bundled Playwright browsers are not installed (system Chrome was used for the checks above) |
 
 ## Log
 
@@ -126,6 +128,14 @@
 
 ### 2026-10-19 — UI fix (user request)
 - Product cards: "Buy on installments" overflowed in narrow 3–4 column grids. Buttons now stack: full-width primary action, then a quiet "View details" link.
+
+### 2026-10-19 — Logout, stock management, mobile layout (user requests)
+- **Logout fixed.** The header Log out was a `<form>` inside the dropdown menu; selecting the item closed the menu and unmounted the form before it submitted, so no request reached the server. All three logout buttons (header menu, mobile menu, admin sidebar) now call the action directly and do a full page load. Cookie expiry now uses the same attributes it was set with (needed for `__Host-` cookies in production).
+- **Mobile menus fixed.** With six account links the menu list grew past the bottom of the screen, pushing Log out off-screen (flex child missing `min-h-0`). Same fix in the admin mobile menu.
+- **Account pages fixed on phones.** Every `/account` page was ~750px wide on a 390px phone (unconstrained grid column; non-wrapping payment rows; oversized balance figure). All now fit 360px.
+- **Stock management.** Products & Offers table has − / count / + controls per product; the edit page has a Stock card. Add, Remove (reason required) and Set exact count, all atomic, never below zero, logged as inventory movements and in the audit log, safe against concurrent order reservations.
+- **Product delete.** Permanent delete with typed confirmation, allowed only when no order references the product (otherwise the dialog offers Archive). Removes it from campaigns; audited.
+- Image loading hints updated for Next 16 (`loading="eager"` + `fetchPriority` instead of `priority`).
 
 ## Changed files summary
 `src/lib/*`, `src/models/*`, `src/server/**`, `src/app/**` (store, account, admin, api, dev), `src/components/**`,

@@ -12,6 +12,8 @@ export function useLogout() {
   const logout = () =>
     start(async () => {
       await logoutAction();
+      // Deliberate full page load (not router.push): drops the client router cache so no signed-in data lingers.
+      // eslint-disable-next-line @next/next/no-location-assign-relative-destination
       window.location.assign("/");
     });
   return { logout, pending };
