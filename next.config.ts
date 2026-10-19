@@ -45,6 +45,12 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  async redirects() {
+    return [
+      // Products and orders saved before the studio photos still reference the old vector renders.
+      { source: "/images/devices/:name((?!placeholder)[a-z0-9-]+).svg", destination: "/images/devices/:name.webp", permanent: true },
+    ];
+  },
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },
