@@ -1,0 +1,137 @@
+▲ Next.js 16.4.2 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.56.1:3000
+- Environments: .env.local
+✓ Ready in 17.8s
+✓ Running next.config.ts took 690ms
+○ Compiling proxy ...
+- Experiments (use with caution):
+  · serverActions
+
+✓ Generated AGENTS.md for AI agents. Set `agentRules: false` in next.config to disable.
+○ Compiling / ...
+ GET / 200 in 24.7s (next.js: 2.9s, application-code: 21.8s)
+ GET / 200 in 18.2s (next.js: 6ms, application-code: 18.2s)
+○ Compiling /shop ...
+ GET / 200 in 10.5s (next.js: 9ms, application-code: 10.5s)
+ POST / 200 in 3.0s (next.js: 26ms, application-code: 3.0s)
+  └─ ƒ trackImpressionAction("6ad57a95e8d04a6204ac24da") in 1676ms src/app/actions/public.ts
+ GET /shop 200 in 6.7s (next.js: 96ms, application-code: 6.6s)
+ POST / 200 in 418ms (next.js: 11ms, application-code: 407ms)
+  └─ ƒ trackImpressionAction("6ad57a95e8d04a6204ac24db") in 181ms src/app/actions/public.ts
+○ Compiling /products/[slug] ...
+ GET /products/iphone-13-128gb-uk-used 200 in 6.7s (next.js: 4.9s, application-code: 1730ms)
+ GET /how-it-works 200 in 1947ms (next.js: 52ms, application-code: 1895ms)
+ GET /how-it-works 200 in 2.1s (next.js: 38ms, application-code: 2.1s)
+ GET /promotions 200 in 3.0s (next.js: 110ms, application-code: 2.9s)
+ GET /faq 200 in 1713ms (next.js: 153ms, application-code: 1560ms)
+○ Compiling /contact ...
+ GET /promotions 200 in 4.3s (next.js: 70ms, application-code: 4.2s)
+ GET /contact 200 in 1784ms (next.js: 110ms, application-code: 1674ms)
+ GET /promotions 200 in 2.7s (next.js: 15ms, application-code: 2.6s)
+ GET /terms 200 in 1322ms (next.js: 48ms, application-code: 1274ms)
+ GET /promotions 200 in 3.0s (next.js: 37ms, application-code: 2.9s)
+ GET /promotions 200 in 2.3s (next.js: 182ms, application-code: 2.1s)
+ GET /promotions 200 in 1601ms (next.js: 8ms, application-code: 1593ms)
+○ Compiling /privacy ...
+ GET /privacy 200 in 890ms (next.js: 101ms, application-code: 790ms)
+○ Compiling /login ...
+ GET /login 200 in 1880ms (next.js: 501ms, application-code: 1380ms)
+ GET /register 200 in 1534ms (next.js: 112ms, application-code: 1422ms)
+ GET /forgot-password 200 in 990ms (next.js: 82ms, application-code: 909ms)
+○ Compiling /api/promotions/[id]/click ...
+ GET /api/promotions/x/click 307 in 6.9s (next.js: 6.6s, application-code: 293ms)
+✓ Finished writing to filesystem cache in 17.8s
+✓ Finished filesystem cache database compaction in 13.0s
+○ Compiling /account ...
+ GET /account 200 in 9.2s (next.js: 6.5s, proxy.ts: 31ms, application-code: 2.6s)
+ GET /account/orders 200 in 3.8s (next.js: 1697ms, proxy.ts: 18ms, application-code: 2.1s)
+ GET /account/orders/6ad57a47e8d04a6204ac2440 200 in 11.3s (next.js: 8.4s, proxy.ts: 24ms, application-code: 2.8s)
+ GET /register 200 in 314ms (next.js: 13ms, application-code: 301ms)
+ GET /account/orders/6ad57a47e8d04a6204ac2440/statement 200 in 14.9s (next.js: 11.6s, proxy.ts: 15ms, application-code: 3.3s)
+ GET /account/installments 200 in 5.3s (next.js: 2.2s, proxy.ts: 16ms, application-code: 3.1s)
+ GET /account/payments 200 in 4.1s (next.js: 1647ms, proxy.ts: 15ms, application-code: 2.4s)
+ GET /account/payments/IPGP-MVEM171R-5832447E/receipt 200 in 7.3s (next.js: 5.9s, proxy.ts: 13ms, application-code: 1398ms)
+ GET /account/profile 200 in 3.7s (next.js: 1967ms, proxy.ts: 16ms, application-code: 1676ms)
+○ Compiling /account/notifications ...
+ GET /account/notifications 200 in 5.6s (next.js: 3.3s, proxy.ts: 47ms, application-code: 2.3s)
+○ Compiling /admin ...
+ GET /admin 307 in 30.6s (next.js: 28.6s, proxy.ts: 23ms, application-code: 1921ms)
+[email:dev] to=rolandantwi56@gmail.com subject="Welcome to iPay Ghana"
+Hi Roland, welcome to iPay Ghana. Browse iPhones and choose a plan that fits your budget.
+ GET /admin 200 in 4.0s (next.js: 102ms, proxy.ts: 24ms, application-code: 3.9s)
+[sms:dev] to=+233241078835 Welcome to iPay Ghana, Roland. Your account is ready.
+ POST /register 200 in 7.6s (next.js: 13ms, application-code: 7.5s)
+  └─ ƒ registerAction({"acceptTerms":true,"confirmPassword":"@banko1234","email":"rolandantwi56@gmail.com","...":"4 items not stringified"}, undefined) in 5449ms src/app/actions/auth.ts
+ GET /account 200 in 4.0s (next.js: 491ms, proxy.ts: 33ms, application-code: 3.5s)
+ GET /account 200 in 3.7s (next.js: 1280ms, proxy.ts: 68ms, application-code: 2.4s)
+ GET /admin/customers 200 in 7.7s (next.js: 3.4s, proxy.ts: 16ms, application-code: 4.2s)
+○ Compiling /admin/customers/[customerId] ...
+ GET /account 200 in 2.6s (next.js: 361ms, proxy.ts: 85ms, application-code: 2.1s)
+ GET /admin/customers/197609 404 in 10.0s (next.js: 8.7s, proxy.ts: 12ms, application-code: 1203ms)
+ GET /account/notifications 200 in 1431ms (next.js: 436ms, proxy.ts: 14ms, application-code: 982ms)
+ GET /admin/products 200 in 6.9s (next.js: 2.9s, proxy.ts: 27ms, application-code: 4.0s)
+ GET /admin/products/new 200 in 3.9s (next.js: 2.4s, proxy.ts: 11ms, application-code: 1467ms)
+ GET /shop 200 in 2.3s (next.js: 20ms, application-code: 2.2s)
+ GET /admin/orders 200 in 5.6s (next.js: 2.4s, proxy.ts: 42ms, application-code: 3.2s)
+ GET /admin/orders/6ad57a47e8d04a6204ac2440 200 in 11.8s (next.js: 7.8s, proxy.ts: 13ms, application-code: 3.9s)
+ GET /admin/plans 200 in 3.4s (next.js: 1511ms, proxy.ts: 12ms, application-code: 1873ms)
+ GET /shop?series=14 200 in 2.1s (next.js: 31ms, application-code: 2.1s)
+○ Compiling /admin/plans/[planId] ...
+ GET /shop?series=14&condition=uk_used 200 in 942ms (next.js: 14ms, application-code: 928ms)
+ GET /admin/plans/new 200 in 12.5s (next.js: 10.2s, proxy.ts: 40ms, application-code: 2.3s)
+ GET /shop?condition=uk_used 200 in 3.8s (next.js: 29ms, application-code: 3.8s)
+○ Compiling /admin/payments ...
+✓ Finished writing to filesystem cache in 12.0s
+ GET /admin/payments 200 in 10.6s (next.js: 4.7s, proxy.ts: 37ms, application-code: 5.9s)
+ GET /shop?condition=uk_used&storage=64 200 in 5.5s (next.js: 46ms, application-code: 5.4s)
+ GET /shop?condition=uk_used&storage=64 200 in 1157ms (next.js: 9ms, application-code: 1148ms)
+ GET /products/iphone-12-64gb-uk-used 200 in 3.9s (next.js: 33ms, application-code: 3.9s)
+ GET /admin/payments/6ad57a64e8d04a6204ac2470 200 in 12.7s (next.js: 9.6s, proxy.ts: 21ms, application-code: 3.1s)
+○ Compiling /admin/installments ...
+ GET /admin/installments 200 in 9.4s (next.js: 3.4s, proxy.ts: 35ms, application-code: 6.0s)
+ GET /admin/promotions 200 in 4.2s (next.js: 1948ms, proxy.ts: 14ms, application-code: 2.2s)
+○ Compiling /admin/promotions/[id] ...
+ GET /admin/promotions/new 200 in 10.3s (next.js: 8.7s, proxy.ts: 18ms, application-code: 1573ms)
+ GET /admin/notifications 200 in 7.4s (next.js: 2.5s, proxy.ts: 11ms, application-code: 4.9s)
+○ Compiling /admin/reports ...
+ GET /admin/reports 200 in 7.0s (next.js: 3.3s, proxy.ts: 12ms, application-code: 3.7s)
+ GET /admin/staff 200 in 4.7s (next.js: 2.5s, proxy.ts: 14ms, application-code: 2.2s)
+ GET /admin/audit-logs 200 in 7.4s (next.js: 2.3s, proxy.ts: 44ms, application-code: 5.0s)
+ GET /shop 200 in 5.0s (next.js: 36ms, application-code: 5.0s)
+○ Compiling /admin/settings ...
+ GET /admin/settings 200 in 11.8s (next.js: 5.8s, proxy.ts: 458ms, application-code: 5.6s)
+✓ Finished writing to filesystem cache in 17.0s
+ GET /products/iphone-13-128gb-uk-used 200 in 7.0s (next.js: 52ms, application-code: 7.0s)
+○ Compiling /admin/security ...
+ GET /admin/security 200 in 8.9s (next.js: 7.3s, proxy.ts: 57ms, application-code: 1528ms)
+○ Compiling /api/admin/export/[type] ...
+ GET /api/admin/export/payments 200 in 7.4s (next.js: 6.3s, application-code: 1102ms)
+ GET /account 307 in 1420ms (next.js: 192ms, proxy.ts: 16ms, application-code: 1212ms)
+ GET /account/profile?verify=1&next=%2Fproducts%2Fiphone-13-128gb-uk-used%23plans 200 in 2.0s (next.js: 467ms, proxy.ts: 20ms, application-code: 1533ms)
+ GET /admin 200 in 2.7s (next.js: 187ms, proxy.ts: 13ms, application-code: 2.5s)
+ GET /admin/products 200 in 3.2s (next.js: 145ms, proxy.ts: 11ms, application-code: 3.0s)
+ GET /admin/payments 307 in 1356ms (next.js: 131ms, proxy.ts: 10ms, application-code: 1215ms)
+ GET /admin/staff 307 in 2.5s (next.js: 251ms, proxy.ts: 29ms, application-code: 2.2s)
+ GET /api/admin/export/payments 403 in 559ms (next.js: 39ms, application-code: 520ms)
+ GET /admin/customers/6ad57a43e8d04a6204ac243b 200 in 5.8s (next.js: 180ms, proxy.ts: 14ms, application-code: 5.6s)
+○ Compiling /admin/products/[productId]/edit ...
+ GET /admin/products/6ad57a3ed79d5c681311899f/edit 200 in 10.7s (next.js: 9.1s, proxy.ts: 11ms, application-code: 1580ms)
+ GET /api/admin/export/payments 200 in 1108ms (next.js: 24ms, application-code: 1083ms)
+✓ Finished filesystem cache database compaction in 17.4s
+ GET / 200 in 4.7s (next.js: 15ms, application-code: 4.7s)
+ GET /account/installments 200 in 1705ms (next.js: 496ms, proxy.ts: 24ms, application-code: 1186ms)
+ GET / 200 in 2.5s (next.js: 6ms, application-code: 2.4s)
+ POST / 200 in 618ms (next.js: 51ms, application-code: 567ms)
+  └─ ƒ trackImpressionAction("6ad57a95e8d04a6204ac24da") in 272ms src/app/actions/public.ts
+  Turbopack has seen frequent file updates and is waiting for the filesystem to settle (0.5s elapsed so far; last modified: "\\\\?\\C:\\Users\\HP\\Desktop\\ipay\\node_modules\\.vitest-cache").
+ POST / 200 in 338ms (next.js: 9ms, application-code: 329ms)
+  └─ ƒ trackImpressionAction("6ad57a95e8d04a6204ac24db") in 184ms src/app/actions/public.ts
+ GET / 200 in 2.6s (next.js: 10ms, application-code: 2.6s)
+ GET /account 200 in 3.0s (next.js: 603ms, proxy.ts: 28ms, application-code: 2.4s)
+✓ Compiled in 2.6s
+ GET /account 200 in 2.1s (next.js: 604ms, proxy.ts: 25ms, application-code: 1505ms)
+ GET /account 200 in 2.6s (next.js: 890ms, proxy.ts: 20ms, application-code: 1699ms)
+ GET /shop 200 in 1943ms (next.js: 6ms, application-code: 1936ms)
+ GET /products/iphone-16-pro-128gb-uk-used 200 in 3.6s (next.js: 42ms, application-code: 3.6s)
+ GET /shop 200 in 2.0s (next.js: 11ms, application-code: 2.0s)

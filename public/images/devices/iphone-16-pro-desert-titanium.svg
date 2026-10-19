@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 600" role="img" aria-label="iPhone 16 Pro in Desert Titanium">
+  <defs>
+    <linearGradient id="backdesert" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#dbc0a6"/><stop offset=".55" stop-color="#bfa48a"/><stop offset="1" stop-color="#997e64"/>
+    </linearGradient>
+    <linearGradient id="sheendesert" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".18"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="screendesert" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e7ccb2"/><stop offset=".5" stop-color="#ab9076"/><stop offset="1" stop-color="#0b1020"/>
+    </linearGradient>
+    <radialGradient id="glassdesert" cx=".4" cy=".35" r=".8">
+      <stop offset="0" stop-color="#3b4a6b"/><stop offset=".6" stop-color="#111522"/><stop offset="1" stop-color="#05060a"/>
+    </radialGradient>
+    <linearGradient id="ringdesert" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#dfc4aa"/><stop offset="1" stop-color="#8f745a"/>
+    </linearGradient>
+    <filter id="shadowdesert" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="14"/><feOffset dy="18"/><feComponentTransfer><feFuncA type="linear" slope=".22"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <ellipse cx="330" cy="560" rx="230" ry="16" fill="#0b1220" opacity=".08"/>
+  <g filter="url(#shadowdesert)">
+    <!-- front -->
+    <g transform="translate(-6 30) rotate(-6 200 320)">
+      <rect x="110" y="70" width="220" height="460" rx="40" fill="#ad9278"/>
+      <rect x="118" y="78" width="204" height="444" rx="33" fill="#05070c"/>
+      <rect x="126" y="86" width="188" height="428" rx="27" fill="url(#screendesert)"/>
+      <rect x="186" y="98" width="68" height="20" rx="10" fill="#05070c"/>
+      <text x="220" y="210" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="52" font-weight="300" fill="#fff" opacity=".92">9:41</text>
+      <text x="220" y="238" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="13" fill="#fff" opacity=".7">Monday, 19 October</text>
+    </g>
+    <!-- back -->
+    <g transform="rotate(5 410 300)">
+      <rect x="300" y="70" width="220" height="460" rx="40" fill="#ad9278"/>
+      <rect x="305" y="75" width="210" height="450" rx="36" fill="url(#backdesert)"/>
+      <rect x="305" y="75" width="210" height="450" rx="36" fill="url(#sheendesert)"/>
+      <rect x="316" y="86" width="110" height="110" rx="30" fill="#b79c82" stroke="#997e64" stroke-opacity=".4"/>
+      
+    <circle cx="348" cy="118" r="23" fill="url(#ringdesert)"/>
+    <circle cx="348" cy="118" r="18" fill="#0b0d12"/>
+    <circle cx="348" cy="118" r="11.16" fill="url(#glassdesert)"/>
+    <circle cx="342.96" cy="112.6" r="2.88" fill="#ffffff" opacity="0.35"/>
+    <circle cx="348" cy="166" r="23" fill="url(#ringdesert)"/>
+    <circle cx="348" cy="166" r="18" fill="#0b0d12"/>
+    <circle cx="348" cy="166" r="11.16" fill="url(#glassdesert)"/>
+    <circle cx="342.96" cy="160.6" r="2.88" fill="#ffffff" opacity="0.35"/>
+    <circle cx="396" cy="142" r="23" fill="url(#ringdesert)"/>
+    <circle cx="396" cy="142" r="18" fill="#0b0d12"/>
+    <circle cx="396" cy="142" r="11.16" fill="url(#glassdesert)"/>
+    <circle cx="390.96" cy="136.6" r="2.88" fill="#ffffff" opacity="0.35"/>
+      <circle cx="400" cy="106" r="6" fill="#f5e7c8" opacity=".8"/>
+    </g>
+  </g>
+</svg>

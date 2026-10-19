@@ -1,0 +1,13 @@
+export const FAQS: { q: string; a: string; group: string }[] = [
+  { group: "Plans", q: "What's the difference between Take & Pay and Pay Small-Small?", a: "With Take & Pay you pay a deposit, get verified and take your iPhone home, then pay the rest in installments. With Pay Small-Small you contribute at your own pace while we keep the device safely in storage; you collect it once it's fully paid." },
+  { group: "Plans", q: "Is the installment price different from the cash price?", a: "Yes. Every product shows both. The installment price is the total you pay across your plan. Some plans add a disclosed financing charge or fees — the full breakdown, including the total amount payable, is shown before you apply." },
+  { group: "Plans", q: "Can I have more than one plan at a time?", a: "No. You can hold one active installment plan. Once it's fully paid and completed, you can apply for your next device straight away." },
+  { group: "Payments", q: "How do I pay?", a: "Pay securely with Mobile Money (MTN MoMo, Telecel Cash, AirtelTigo Money) or card through our payment provider. Your balance updates as soon as the payment is confirmed." },
+  { group: "Payments", q: "Can I pay early or pay more than my installment?", a: "On most plans, yes. Extra payments settle your next installments first, which brings your completion date closer. You can also clear your full balance at any time." },
+  { group: "Payments", q: "What happens if a payment fails?", a: "Nothing is deducted from your balance unless the payment is confirmed. You'll see the failed attempt in your history and can try again immediately." },
+  { group: "Payments", q: "What if I miss a payment?", a: "There's a grace period after each due date. We don't charge automatic late fees — we'll reach out respectfully to agree a way forward. Please contact us early if you're having difficulty." },
+  { group: "Eligibility", q: "What do I need to apply?", a: "An iPay Ghana account and a valid Ghana phone number. Take & Pay plans also need identity verification with a valid Ghana Card or passport, checked by our team." },
+  { group: "Eligibility", q: "How long does approval take?", a: "Most applications are reviewed within one business day. You'll get an SMS and email as soon as yours is approved." },
+  { group: "Devices", q: "What does UK used mean?", a: "UK used iPhones are pre-owned devices sourced from the UK, inspected and graded by our technicians. Each listing shows its grade and battery health." },
+  { group: "Devices", q: "Where do I collect my iPhone?", a: "At our Accra store or a partner location. Bring a valid ID that matches your account. Delivery may be available in some areas." },
+];
