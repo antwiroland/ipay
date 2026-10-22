@@ -4,7 +4,8 @@ import type { PaymentProvider, VerifiedStatus } from "./types";
 const BASE = "https://api.paystack.co";
 
 function secret() {
-  const key = process.env.PAYSTACK_SECRET_KEY;
+  // Trimmed: keys pasted into hosting dashboards often pick up stray whitespace.
+  const key = process.env.PAYSTACK_SECRET_KEY?.trim();
   if (!key) throw new Error("PAYSTACK_SECRET_KEY is not configured");
   return key;
 }
@@ -33,7 +34,7 @@ function mapStatus(s: string): VerifiedStatus {
 export const paystackProvider: PaymentProvider = {
   name: "paystack",
   get isTest() {
-    return (process.env.PAYSTACK_SECRET_KEY ?? "").startsWith("sk_test_");
+    return (process.env.PAYSTACK_SECRET_KEY ?? "").trim().startsWith("sk_test_");
   },
 
   async initialize(input) {

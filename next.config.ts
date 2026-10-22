@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const isDev = process.env.NODE_ENV !== "production";
+// Development behind a tunnel (e.g. ngrok, for Paystack callbacks/webhooks): trust APP_URL's host.
+const devTunnelHost = isDev && process.env.APP_URL ? new URL(process.env.APP_URL).hostname : null;
+const tunnelHosts = devTunnelHost && devTunnelHost !== "localhost" ? [devTunnelHost] : [];
 
 const csp = [
   "default-src 'self'",
@@ -29,13 +32,14 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  allowedDevOrigins: tunnelHosts,
   serverExternalPackages: ["mongoose", "mongodb-memory-server"],
   images: {
     remotePatterns: [{ protocol: "https", hostname: "res.cloudinary.com" }],
     formats: ["image/avif", "image/webp"],
   },
   experimental: {
-    serverActions: { bodySizeLimit: "1mb" },
+    serverActions: { bodySizeLimit: "1mb", allowedOrigins: tunnelHosts },
   },
   turbopack: {
     rules: {
