@@ -37,4 +37,14 @@ export function isSandboxMode() {
   }
 }
 
+/** Paystack with an sk_test_ key: real gateway, test money (as opposed to the fully simulated mock). */
+export function isPaystackTestMode() {
+  try {
+    const p = activeProvider();
+    return p.name === "paystack" && p.isTest;
+  } catch {
+    return false;
+  }
+}
+
 export type { PaymentProvider } from "./types";

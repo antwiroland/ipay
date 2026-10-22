@@ -3,7 +3,7 @@ import { Logo } from "@/components/brand";
 import { Button } from "@/components/ui/button";
 import { isStaffRole } from "@/lib/permissions";
 import { getActor } from "@/server/auth/session";
-import { isSandboxMode } from "@/server/payments";
+import { isPaystackTestMode, isSandboxMode } from "@/server/payments";
 import { unreadCount } from "@/server/services/notifications";
 import { AccountMenu, MobileNav, NavLinks } from "./site-header-client";
 
@@ -24,7 +24,9 @@ export async function SiteHeader() {
     <>
       {isSandboxMode() && (
         <div className="no-print bg-warning-soft py-1.5 text-center text-[12px] font-medium text-warning">
-          Development sandbox — payments are simulated and no real money moves.
+          {isPaystackTestMode()
+            ? "Paystack test mode — use Paystack test cards or numbers; no real money moves."
+            : "Development sandbox — payments are simulated and no real money moves."}
         </div>
       )}
       <header className="sticky top-0 z-40 border-b border-border/70 bg-background/85 backdrop-blur-xl no-print">

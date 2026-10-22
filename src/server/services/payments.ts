@@ -158,7 +158,8 @@ export async function initiatePayment(actor: Actor, input: unknown, appUrl: stri
       currency: "GHS",
       email: user!.email,
       phone: user!.phone,
-      callbackUrl: `${appUrl.replace(/\/$/, "")}/account/payments/return?reference=${encodeURIComponent(reference)}`,
+      // No query string here: Paystack appends "?trxref=…&reference=…" itself, and a second "?" corrupts the reference.
+      callbackUrl: `${appUrl.replace(/\/$/, "")}/account/payments/return`,
       metadata: { orderNumber: order.orderNumber, kind, customerId: actor.userId },
     });
     await Payment.updateOne({ _id: payment._id }, { $set: { checkoutUrl: init.checkoutUrl, providerReference: init.providerReference ?? null } });
