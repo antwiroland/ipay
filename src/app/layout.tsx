@@ -8,7 +8,7 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.APP_URL || "http://localhost:3000"),
-  title: { default: "iPay Ghana — Your iPhone. Your Plan. Your Pace.", template: "%s · iPay Ghana" },
+  title: { default: "iPay Ghana — GET YOUR IPHONE NOW. PAY KOKOOKO LATER", template: "%s · iPay Ghana" },
   description:
     "Buy an iPhone in Ghana on flexible installment plans. Pay a deposit, track every payment and see exactly what you have left to pay.",
   openGraph: { siteName: "iPay Ghana", locale: "en_GH", type: "website" },

@@ -64,7 +64,7 @@ export default async function HomePage() {
         <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 pt-12 pb-16 sm:px-6 md:pt-16 lg:grid-cols-[1.05fr_1fr] lg:px-8 lg:pt-20">
           <div className="animate-fade-up">
             <p className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-[12.5px] font-medium text-muted shadow-sm">
-              <span className="size-1.5 rounded-full bg-success" /> Your iPhone. Your Plan. Your Pace.
+              <span className="size-1.5 rounded-full bg-success" /> GET YOUR IPHONE NOW. PAY KOKOOKO LATER
             </p>
             <h1 className="mt-5 text-[40px] leading-[1.02] font-semibold tracking-[-0.03em] text-balance sm:text-[56px] lg:text-[64px]">
               Own your next iPhone.{" "}

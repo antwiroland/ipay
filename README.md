@@ -1,6 +1,6 @@
 # iPay Ghana
 
-**Your iPhone. Your Plan. Your Pace.** — a premium iPhone storefront with installment purchasing for Ghana.
+**GET YOUR IPHONE NOW. PAY KOKOOKO LATER** — a premium iPhone storefront with installment purchasing for Ghana.
 
 Customers browse brand-new and UK-used iPhones, choose a **Take & Pay** or **Pay Small-Small** plan, pay a deposit
 and keep paying (Mobile Money / card) until the agreed price is settled — with a live balance, schedule, receipts and
